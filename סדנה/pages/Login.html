@@ -30,7 +30,13 @@
         <form class="form">
           <p class="title">Sign in to your account</p>
           <label>
-            <input class="input" type="email" placeholder="" required="" />
+            <input
+              class="input"
+              type="email"
+              placeholder=""
+              required=""
+              oninput="validateEmail(this)"
+            />
             <span>Email</span>
           </label>
 
