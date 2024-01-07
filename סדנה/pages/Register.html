@@ -16,83 +16,97 @@
     <link rel="icon" href="/סדנה/pics/Logo.png" />
   </head>
   <body>
-    <div class="d-flex justify-content-center align-items-center">
-      <img
-        src="/סדנה/pics/Logo.png"
-        class="img-fluid rounded-3 mx-auto"
-        alt="LOGO"
-        width="325px"
-      />
-    </div>
-    <div
-      class="container-fluid align-items-center d-flex justify-content-center"
-    >
-      <div class="row">
-        <form class="form">
-          <p class="title">Register</p>
-          <p class="message">Signup now and get full access to our website.</p>
-          <div class="flex">
-            <label>
-              <input
-                class="input"
-                type="text"
-                placeholder=""
-                required=""
-                oninput="validateName(this)"
-              />
-              <span>Firstname</span>
-            </label>
-
-            <label>
-              <input
-                class="input"
-                type="text"
-                placeholder=""
-                required=""
-                oninput="validateName(this)"
-              />
-              <span>Lastname</span>
-            </label>
-          </div>
-
-          <label>
-            <input
-              class="input"
-              type="email"
-              placeholder=""
-              required=""
-              oninput="validateEmail(this)"
-            />
-            <span>Email</span>
-          </label>
-
-          <label>
-            <input
-              class="input"
-              type="password"
-              id="pass"
-              placeholder=""
-              required=""
-            />
-            <span>Password</span>
-          </label>
-          <label>
-            <input
-              class="input"
-              type="password"
-              id="confirmPass"
-              placeholder=""
-              required=""
-            />
-            <span>Confirm password</span>
-          </label>
-          <button class="submit">Submit</button>
-          <p class="signin">
-            Already have an acount ? <a href="/סדנה/pages/Login.html">Signin</a>
-          </p>
-        </form>
+    <nav>
+      <ul>
+        <li>
+          <a href="/סדנה/Index.html">Home</a>
+        </li>
+      </ul>
+    </nav>
+    <header>
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="/סדנה/pics/Logo.png"
+          class="img-fluid rounded-3 mx-auto"
+          alt="LOGO"
+          width="200px"
+        />
       </div>
-    </div>
+    </header>
+    <main>
+      <div
+        class="container-fluid align-items-center d-flex justify-content-center"
+      >
+        <div class="row">
+          <form class="form">
+            <p class="title">Register</p>
+            <p class="message">
+              Signup now and get full access to our website.
+            </p>
+            <div class="flex">
+              <label>
+                <input
+                  class="input"
+                  type="text"
+                  placeholder=""
+                  required=""
+                  oninput="validateName(this)"
+                />
+                <span>Firstname</span>
+              </label>
+
+              <label>
+                <input
+                  class="input"
+                  type="text"
+                  placeholder=""
+                  required=""
+                  oninput="validateName(this)"
+                />
+                <span>Lastname</span>
+              </label>
+            </div>
+
+            <label>
+              <input
+                class="input"
+                type="email"
+                placeholder=""
+                required=""
+                oninput="validateEmail(this)"
+              />
+              <span>Email</span>
+            </label>
+
+            <label>
+              <input
+                class="input"
+                type="password"
+                id="pass"
+                placeholder=""
+                required=""
+              />
+              <span>Password</span>
+            </label>
+            <label>
+              <input
+                class="input"
+                type="password"
+                id="confirmPass"
+                placeholder=""
+                required=""
+              />
+              <span>Confirm password</span>
+            </label>
+            <button class="submit">Submit</button>
+            <p class="signin">
+              Already have an acount ?
+              <a href="/סדנה/pages/Login.html">Signin</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </main>
     <script src="/סדנה/JS/script.js"></script>
   </body>
 </html>
