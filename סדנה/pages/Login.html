@@ -16,44 +16,61 @@
     <link rel="icon" href="/סדנה/pics/Logo.png" />
   </head>
   <body>
-    <div class="d-flex justify-content-center align-items-center">
-      <img
-        src="/סדנה/pics/Logo.png"
-        class="img-fluid rounded-3 mx-auto"
-        alt="LOGO"
-        width="325x"
-      />
-    </div>
-    <div
-      class="container-fluid align-items-center d-flex justify-content-center"
-    >
-      <div class="row">
-        <form class="form">
-          <p class="title">Sign in to your account</p>
-          <label>
-            <input
-              class="input"
-              type="email"
-              placeholder=""
-              required=""
-              oninput="validateEmail(this)"
-            />
-            <span>Email</span>
-          </label>
-
-          <label>
-            <input class="input" type="password" placeholder="" required="" />
-            <span>Password</span>
-          </label>
-          <button type="submit" class="submit">Sign in</button>
-
-          <p class="signup-link">
-            No account?
-            <a href="/סדנה/pages/Register.html">Sign up</a>
-          </p>
-        </form>
+    <nav>
+      <ul>
+        <li class="navImg">
+          <img
+            src="/סדנה/pics/Logo.png"
+            class="img-fluid rounded-3 mx-auto"
+            alt="LOGO"
+            width="50px"
+          />
+        </li>
+        <li>
+          <a href="/סדנה/Index.html">Home</a>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          src="/סדנה/pics/Logo.png"
+          class="img-fluid rounded-3 mx-auto"
+          alt="LOGO"
+          width="325x"
+        />
       </div>
-    </div>
+      <div
+        class="container-fluid align-items-center d-flex justify-content-center"
+      >
+        <div class="row">
+          <form class="form">
+            <p class="title">Sign in to your account</p>
+            <label>
+              <input
+                class="input"
+                type="email"
+                placeholder=""
+                required=""
+                oninput="validateEmail(this)"
+              />
+              <span>Email</span>
+            </label>
+
+            <label>
+              <input class="input" type="password" placeholder="" required="" />
+              <span>Password</span>
+            </label>
+            <button type="submit" class="submit">Sign in</button>
+
+            <p class="signup-link">
+              No account?
+              <a href="/סדנה/pages/Register.html">Sign up</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </main>
     <script src="/סדנה/JS/script.js"></script>
   </body>
 </html>

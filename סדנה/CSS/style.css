@@ -144,3 +144,35 @@ div {
     opacity: 0;
   }
 }
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  top: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #a9b3c6;
+}
+.navImg {
+  float: left;
+  margin-left: 20px;
+}
+nav li {
+  display: inline-block;
+}
+nav li a {
+  display: block;
+  color: rgb(63, 86, 155);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background: #929eb5;
+  border-radius: 10px;
+}
+li a:hover {
+  background-color: #0b1446;
+  border-radius: 10px;
+}
