@@ -3,6 +3,7 @@ body,
 div {
   background: #a9b3c6;
 }
+/*----------------*/
 main {
   background: #a9b3c6;
   display: flex;
@@ -10,6 +11,7 @@ main {
   justify-content: center;
   padding-bottom: 70px;
 }
+/*----------------*/
 article {
   text-align: center;
   justify-content: center;
@@ -33,9 +35,11 @@ article p {
   text-shadow: 3px 3px 3px #0b14465f;
   line-height: 25px;
 }
+/*----------------*/
 .selector-for-some-widget {
   box-sizing: content-box;
 }
+/*----------------*/
 .form {
   display: flex;
   flex-direction: column;
@@ -184,6 +188,7 @@ article p {
     opacity: 0;
   }
 }
+/*----------------*/
 nav {
   margin-top: 10px;
   display: flex;
@@ -196,7 +201,25 @@ nav ul {
   top: 0;
   width: 100%;
   background-color: #a9b3c6;
-  overflow: hidden;
+}
+
+.subMnue {
+  left: 0;
+  opacity: 0;
+  top: 35px;
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  transform-origin: top center;
+}
+.subMnue li {
+  width: 100%;
+  float: none;
+}
+li:hover ul.subMnue {
+  opacity: 1;
+  visibility: visible;
+  top: 80 px;
 }
 
 .logo {
@@ -226,6 +249,7 @@ li a:hover {
   );
   border-radius: 10px;
 }
+/*----------------*/
 .tooltip-container {
   --background: #fefbff;
   --inner-shadow: #9faef9;
@@ -348,7 +372,9 @@ button a {
   text-decoration: none;
   color: #8676c9;
 }
+/*----------------*/
 footer {
   background: #a9b3c6;
   color: rgb(63, 86, 155);
 }
+/*----------------*/
