@@ -203,7 +203,7 @@ nav ul {
   background-color: #a9b3c6;
 }
 
-.subMnue {
+.subMenu {
   left: 0;
   opacity: 0;
   top: 35px;
@@ -211,15 +211,17 @@ nav ul {
   z-index: 1;
   position: absolute;
   transform-origin: top center;
+  width: 100%;
 }
-.subMnue li {
+.subMenu li {
+  position: relative;
   width: 100%;
   float: none;
 }
-li:hover ul.subMnue {
+li:hover .subMenu {
   opacity: 1;
   visibility: visible;
-  top: 80 px;
+  top: 80px;
 }
 
 .logo {
@@ -230,6 +232,7 @@ li:hover ul.subMnue {
 }
 nav li {
   display: inline-block;
+  width: auto;
 }
 nav li a {
   display: block;
@@ -239,6 +242,7 @@ nav li a {
   text-decoration: none;
   background: rgba(136, 145, 164, 0.4);
   border-radius: 10px;
+  transition: 0.3s all ease;
 }
 li a:hover {
   background-image: linear-gradient(
