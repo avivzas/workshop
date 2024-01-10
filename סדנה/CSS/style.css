@@ -189,60 +189,12 @@ article p {
   }
 }
 /*----------------*/
-nav {
-  margin-top: 10px;
-  display: flex;
-}
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  top: 0;
-  width: 100%;
-  background-color: #a9b3c6;
-}
-
-.subMenu {
-  left: 0;
-  opacity: 0;
-  top: 35px;
-  visibility: hidden;
-  z-index: 1;
-  position: absolute;
-  transform-origin: top center;
-  width: 100%;
-}
-.subMenu li {
-  position: relative;
-  width: 100%;
-  float: none;
-}
-li:hover .subMenu {
-  opacity: 1;
-  visibility: visible;
-  top: 80px;
-}
 
 .logo {
   color: rgb(63, 86, 155);
   text-shadow: 3px 3px 3px #0b144692;
   font-family: "Orbitron", sans-serif;
   padding: 5px;
-}
-nav li {
-  display: inline-block;
-  width: auto;
-}
-nav li a {
-  display: block;
-  color: rgb(63, 86, 155);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  background: rgba(136, 145, 164, 0.4);
-  border-radius: 10px;
-  transition: 0.3s all ease;
 }
 li a:hover {
   background-image: linear-gradient(
