@@ -88,14 +88,14 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                My Rentals
+                Reservations
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
                   <a class="dropdown-item" href="#">Search new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists Rentals</a>
+                  <a class="dropdown-item" href="#">Exists Reservations</a>
                 </li>
               </ul>
             </li>
