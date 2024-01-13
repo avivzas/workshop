@@ -134,7 +134,64 @@
         width="200px"
       />
     </div>
-    <div ><h1 class="greeting" id="greeting" ></h1></div>
+    <div><h1 class="greeting m-0 " id="greeting" ></h1></div>
+    <div class="d-flex justify-content-center align-items-center m-0 p-2">
+    <div id="carouselExample" class="carousel slide" style="max-width: 600px;">
+  <div class="carousel-inner  " >
+    <div class="carousel-item active" >
+      <img src="/workshop/pics/space1.jpg" class="d-block w-100" alt="space 1" >
+    </div>
+    <div class="carousel-item">
+      <img src="/workshop/pics/space2.jpg" class="d-block w-100" alt="space 2">
+    </div>
+    <div class="carousel-item">
+      <img src="/workshop/pics/space3.jpg" class="d-block w-100" alt="space 3">
+    </div>
+    <div class="carousel-item">
+      <img src="/workshop/pics/space4.webp" class="d-block w-100" alt="space 4">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center m-0  p-0">
+    <h1 class="greeting">Meet our developers</h1></div>
+    <div class="d-flex justify-content-center  m-0  p-0">
+      <div class="card m-3 border-black border-2 rounded-2 " style="width: 18rem;">
+        <img src="/workshop/pics/aviv.jpg" class="card-img-top" alt="aviv">
+        <div class="card-body">
+        <p class="card-text"><h3 >Aviv shmilovich</h3><br>How i see my workspace? 
+        <br>where ever i want! </p>
+        </div>
+      </div>
+      <div class="card m-3 border-black border-2 rounded-2 " style="width: 18rem;">
+        <img src="/workshop/pics/tslil.jpeg" class="card-img-top" alt="aviv">
+        <div class="card-body">
+        <p class="card-text"><h3 >Tslil nagar</h3><br>Looking to rent your extra workspace? 
+        <br>we got you covered </p>
+        </div>
+      </div>
+      <div class="card m-3 border-black rounded-2 border-2" style="width: 18rem;">
+        <img src="/workshop/pics/liad.jpeg" class="card-img-top" alt="aviv">
+        <div class="card-body">
+        <p class="card-text  "><h3 >Liad Arami</h3><br>Im done working at coffee houses  
+        </p>
+        </div>
+      </div>
+      <div class="card m-3 border-black rounded-2 border-2" style="width: 18rem;">
+        <img src="/workshop/pics/mark.jpg" class="card-img-top" alt="aviv">
+        <div class="card-body">
+        <p class="card-text  "><h3 >Mark kravetz</h3><br>Start your journey with us today!</p>
+        </div>
+      </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"

@@ -26,12 +26,15 @@ article {
   );
 }
 .greeting {
+  background: #a9b3c6;
   color: rgb(63, 86, 155);
   text-shadow: 3px 3px 3px #0b144692;
   font-family: "Orbitron", sans-serif;
   justify-content: center;
   text-align: center;
+  margin: 0;
 }
+
 article h1 {
   color: rgb(63, 86, 155);
   text-shadow: 3px 3px 3px #0b144692;
