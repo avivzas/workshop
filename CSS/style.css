@@ -14,6 +14,7 @@ main {
 /*----------------*/
 article {
   text-align: center;
+  max-width: 720px;
   justify-content: center;
   width: 50%;
   border-radius: 34% 66% 72% 28% / 42% 48% 52% 58%;
@@ -24,6 +25,16 @@ article {
     rgba(255, 204, 112, 0.37) 97.7%
   );
 }
+.greeting {
+  background: #a9b3c6;
+  color: rgb(63, 86, 155);
+  text-shadow: 3px 3px 3px #0b144692;
+  font-family: "Orbitron", sans-serif;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+}
+
 article h1 {
   color: rgb(63, 86, 155);
   text-shadow: 3px 3px 3px #0b144692;
@@ -189,56 +200,13 @@ article p {
   }
 }
 /*----------------*/
-nav {
-  margin-top: 10px;
-  display: flex;
-}
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  top: 0;
-  width: 100%;
-  background-color: #a9b3c6;
-}
-
-.subMnue {
-  left: 0;
-  opacity: 0;
-  top: 35px;
-  visibility: hidden;
-  z-index: 1;
-  position: absolute;
-  transform-origin: top center;
-}
-.subMnue li {
-  width: 100%;
-  float: none;
-}
-li:hover ul.subMnue {
-  opacity: 1;
-  visibility: visible;
-  top: 80 px;
-}
 
 .logo {
   color: rgb(63, 86, 155);
   text-shadow: 3px 3px 3px #0b144692;
   font-family: "Orbitron", sans-serif;
   padding: 5px;
-}
-nav li {
-  display: inline-block;
-}
-nav li a {
-  display: block;
-  color: rgb(63, 86, 155);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  background: rgba(136, 145, 164, 0.4);
-  border-radius: 10px;
+  margin-right: 20px;
 }
 li a:hover {
   background-image: linear-gradient(
