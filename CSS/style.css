@@ -25,6 +25,13 @@ article {
     rgba(255, 204, 112, 0.37) 97.7%
   );
 }
+.greeting {
+  color: rgb(63, 86, 155);
+  text-shadow: 3px 3px 3px #0b144692;
+  font-family: "Orbitron", sans-serif;
+  justify-content: center;
+  text-align: center;
+}
 article h1 {
   color: rgb(63, 86, 155);
   text-shadow: 3px 3px 3px #0b144692;

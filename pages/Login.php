@@ -56,7 +56,7 @@
                 class="nav-link active"
                 aria-current="page"
                 href="/workshop/Index.html"
-                >Home</a
+                >Our mission</a
               >
             </li>
             <li class="nav-item">
@@ -83,25 +83,25 @@
         class="container-fluid align-items-center d-flex justify-content-center"
       >
         <div class="row">
-          <form method="post" action= "Homepage.html" class="form" >
+          <form method="post" action="helpers/LoginHelper.php" class="form needs-validation" novalidate >
             <p class="title">Sign in</p>
             <p class="message">Sign in to your account .</p>
             <label>
               <input
                 class="input"
-                type="email"
+                type="text"
                 placeholder=""
                 required=""
-                oninput="validateEmail(this)"
+                name="userName"
               />
-              <span>Email</span>
+              <span>User Name</span>
             </label>
 
             <label>
-              <input class="input" type="password" placeholder=""  required="" />
+              <input class="input" type="password" placeholder="" name="pass" required="" />
               <span>Password</span>
             </label>
-            <button type="submit" class="submit">Sign in
+            <button type="submit" class="submit" name="submit">Sign in
             </button>
             <p class="signup-link">
               No account?

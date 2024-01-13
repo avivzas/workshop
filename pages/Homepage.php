@@ -27,6 +27,20 @@
     <link rel="icon" href="/workshop/pics/Logo.png" />
   </head>
   <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
+        header('Location: http://localhost/workshop/pages/Login.php');
+        exit;
+    } else {
+        echo "<script>
+        window.onload = function() {
+            var usernameDiv = document.getElementById('greeting');
+            usernameDiv.innerHTML =  'Hello, " . $_SESSION['firstName'] . "';
+            }
+        </script>";
+    }
+    ?>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
       <div class="container-fluid">
         <h1 class="logo">WorkHouse</h1>
@@ -44,7 +58,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="Homepage.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="Homepage.php">Home</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -97,14 +111,14 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-            <img src="/workshop/pics/defult profile pic.png" alt="Profile Pic" width="30" height="30">
+            <img src="/workshop/pics/profile_pic.png" alt="Profile Pic" width="30" height="30">
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li>
                 <a class="dropdown-item" href="#">Edit profile</a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">Sign Out</a>
+                <a class="dropdown-item" href="Login.php">Sign Out</a>
               </li>
             </ul>
           </li>
@@ -120,12 +134,14 @@
         width="200px"
       />
     </div>
-  </body>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <div ><h1 class="greeting" id="greeting" ></h1></div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-GLhlTQ8iKt6iOpSkjE+LBgEFs7otFJbDRlwHzzl5u"
     crossorigin="anonymous"
   ></script>
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </body>
+
 </html>

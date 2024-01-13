@@ -48,7 +48,7 @@
                 class="nav-link active"
                 aria-current="page"
                 href="/workshop/Index.html"
-                >Home</a
+                >Our mission</a
               >
             </li>
             <li class="nav-item">
@@ -75,7 +75,11 @@
         class="container-fluid align-items-center d-flex justify-content-center"
       >
         <div class="row">
-          <form class="form">
+          <form
+            method="post"
+            action="helpers/RegisterHelper.php"
+            class="form needs-validation"
+          >
             <p class="title">Register</p>
             <p class="message">
               Signup now and get full access to our website.
@@ -87,9 +91,11 @@
                   type="text"
                   placeholder=""
                   required=""
+                  id="firstName"
+                  name="firstName"
                   oninput="validateName(this)"
                 />
-                <span>Firstname</span>
+                <span>First name</span>
               </label>
 
               <label>
@@ -98,11 +104,26 @@
                   type="text"
                   placeholder=""
                   required=""
+                  id="lastName"
+                  name="lastName"
                   oninput="validateName(this)"
                 />
-                <span>Lastname</span>
+                <span>Last name</span>
               </label>
             </div>
+
+            <label>
+              <input
+                class="input"
+                type="text"
+                placeholder=""
+                required=""
+                id="userName"
+                name="userName"
+                oninput="validateName(this) "
+              />
+              <span>User Name</span>
+            </label>
 
             <label>
               <input
@@ -110,6 +131,8 @@
                 type="email"
                 placeholder=""
                 required=""
+                id="email"
+                name="email"
                 oninput="validateEmail(this)"
               />
               <span>Email</span>
@@ -120,6 +143,7 @@
                 class="input"
                 type="password"
                 id="pass"
+                name="pass"
                 placeholder=""
                 required=""
               />
@@ -135,7 +159,7 @@
               />
               <span>Confirm password</span>
             </label>
-            <button class="submit">Submit</button>
+            <button class="submit" type="submit" name="submit">Submit</button>
             <p class="signin">
               Already have an acount ?
               <a href="Login.php">Sign In</a>
