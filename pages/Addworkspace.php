@@ -27,6 +27,10 @@
     <link rel="icon" href="/workshop/pics/Logo.png" />
   </head>
   <body>
+    <?php
+    session_start();
+      $userName = $_SESSION['userName'];
+  ?>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
       <div class="container-fluid">
         <h1 class="logo">WorkHouse</h1>
@@ -122,7 +126,7 @@
     </div>
     <div class="container-fluid align-items-center d-flex justify-content-center">
         <div class="row">
-            <form class="form" method="post">
+            <form class="form" method="post" action="helpers/AddworkspaceHelper.php">
                 <p class="title">Add New Workspace</p>
                 
                 <label>
@@ -162,7 +166,7 @@
 
 
                 <label> 
-                <input class="input" type="text" id="ownerName" name="ownerName" oninput="validateName(this) " required>
+                <input class="input" type="text" id="ownerName" name="ownerName" oninput="validateFullName(this) " required>
                 <span>Owner</span>
                 </label>
                 
@@ -175,9 +179,10 @@
                     id="email"
                     name="email"
                     oninput="validateEmail(this)"
-                    />
+                    >
                 <span>Email</span>
                 </label>
+                  
 
                 <label>
                     <input class="input" type="file" id="pictures" name="pictures" accept="image/*" multiple>
@@ -189,7 +194,6 @@
                 <textarea class="input" id="aboutWorkspace" name="aboutWorkspace" rows="4"></textarea>
                 <span>About the Workspace</span>
                 </label>
-
 
                 <button class="submit" type="submit" name="submit">Add workspace</button>
             </form>
@@ -219,6 +223,15 @@
                 input.setCustomValidity("");
             }
             }
+            // validate the full name of the user
+        function validateFullName(input) {
+          var pattern = /^[a-zA-Z]+ [a-zA-Z]+( [a-zA-Z]+)*$/;
+          if (!pattern.test(input.value)) {
+            input.setCustomValidity("Please enter a valid full name in english");
+          } else {
+            input.setCustomValidity("");
+          }
+        }
     </script>
   </body>
 

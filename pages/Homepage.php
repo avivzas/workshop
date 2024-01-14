@@ -72,7 +72,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a class="dropdown-item" href="Addworkspace.html">Create new workspace</a>
+                  <a class="dropdown-item" href="Addworkspace.php">Create new workspace</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="#">Exists workspaces</a>

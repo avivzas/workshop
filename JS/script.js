@@ -7,6 +7,7 @@ function validateName(input) {
     input.setCustomValidity("");
   }
 }
+
 // validate the email of the user
 function validateEmail(input) {
   var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
