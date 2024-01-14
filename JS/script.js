@@ -16,6 +16,7 @@ function validateEmail(input) {
     input.setCustomValidity("");
   }
 }
+
 // validate the password at register of the user
 $(document).ready(function () {
   $("#pass, #confirmPass").on("input", function () {
