@@ -70,7 +70,7 @@
               >
                 My Workspaces
               </a>
-              <ul class="dropdown-menu dropdown-menu-dark">
+              <ul class="dropdown-menu dropdown-menu-dark ">
                 <li>
                   <a class="dropdown-item" href="Addworkspace.php">Create new workspace</a>
                 </li>
