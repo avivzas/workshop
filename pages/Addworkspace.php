@@ -128,11 +128,21 @@
         <div class="row">
             <form class="form" method="post" action="helpers/AddworkspaceHelper.php">
                 <p class="title">Add New Workspace</p>
-                
+                <label>
+                <select class="input" id="placeType" name="region" required>
+                    <option selected disabled></option>
+                    <option value="office">Center</option>
+                    <option option value="hangar">North</option>
+                    <option value="workStation">South</option>
+                    </select>
+                    <span>Region</span>
+                </label>
                 <label>
                     <input class="input" type="text" id="city" name="city" oninput="validateCity(this) " required>
                     <span>City</span>
                 </label>
+                
+
 
                 <label>
                     <input class="input" type="text" id="address" name="address" oninput="validateAddress(this)" required>

@@ -40,6 +40,7 @@ if ($conn->connect_error) {
 session_start();
 
 if (isset($_POST['submit'])) {
+    $region = $_POST['region'];
     $city = $_POST['city'];
     $address = $_POST['address'];
     $placeType = $_POST['placeType'];
@@ -54,7 +55,7 @@ if (isset($_POST['submit'])) {
 
 
         // Insert form data into the database
-        $sql = "INSERT INTO workspaces (city, address, placeType, rentalPeriod, dailyPrice, ownerName, email,pictures,aboutWorkspace, userName) 
+        $sql = "INSERT INTO workspaces (region,city, address, placeType, rentalPeriod, dailyPrice, ownerName, email,pictures,aboutWorkspace, userName) 
                 VALUES ('$city','$address', '$placeType', '$rentalPeriod', '$dailyPrice', '$ownerName', '$email','$pictures','$aboutWorkspace', '" . $_SESSION['userName'] . "')";
 
         if ($conn->query($sql) === TRUE) {
