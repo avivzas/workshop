@@ -130,7 +130,7 @@
                 <p class="title">Add New Workspace</p>
                 
                 <label>
-                    <input class="input" type="text" id="city" name="city" oninput="validateName(this) " required>
+                    <input class="input" type="text" id="city" name="city" oninput="validateCity(this) " required>
                     <span>City</span>
                 </label>
 
@@ -232,6 +232,15 @@
             input.setCustomValidity("");
           }
         }
+        function validateCity(input) {
+  var pattern = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+
+  if (!pattern.test(input.value)) {
+    input.setCustomValidity("Please enter a valid full name with only letters and spaces");
+  } else {
+    input.setCustomValidity("");
+  }
+}
     </script>
   </body>
 

@@ -75,7 +75,7 @@
                   <a class="dropdown-item" href="Addworkspace.php">Create new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists workspaces</a>
+                  <a class="dropdown-item" href="Existworkspace.php">Exists workspaces</a>
                 </li>
               </ul>
             </li>
