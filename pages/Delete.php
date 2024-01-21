@@ -13,9 +13,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    else{
-        echo "connected";
-    }
+
 
 if (isset($_GET['delete'])) {
     $id=$_GET['delete'];
@@ -23,7 +21,7 @@ if (isset($_GET['delete'])) {
     $sql = "DELETE FROM `workspaces` WHERE id=$id AND userName='$user'";
     $result = $conn->query($sql);
     if($result){
-        header('location:MyWorkspaces.php');
+        header('location:Existworkspace.php');
     }else{
         die( $conn->connect_error);
     }

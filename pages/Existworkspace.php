@@ -11,9 +11,7 @@ $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-else{
-    echo "connected";
-}
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -46,10 +44,10 @@ else{
   </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
-      <div class="container-fluid">
+      <div class="container-fluid bg-body ">
         <h1 class="logo">WorkHouse</h1>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler "
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNavDropdown"
@@ -59,14 +57,14 @@ else{
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse bg-body" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="Homepage.php">Home</a>
+              <a class="nav-link active p-3" aria-current="page" href="Homepage.php">Home</a>
             </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle p-3"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -86,7 +84,7 @@ else{
 
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle p-3"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -104,12 +102,12 @@ else{
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:SystemManager@WorkHouse.com">Contact Us</a>
+              <a class="nav-link p-3" href="mailto:SystemManager@WorkHouse.com">Contact Us</a>
             </li>
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown-toggle p-3"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
@@ -131,11 +129,11 @@ else{
       </div>
     </nav>
 
-<div class="container">
+<div class="container-fluid p-0 m-0 ">
 
 <button class="btn btn-primary my-5 "> <a href="Addworkspace.php" class="text-light"> Add New Workspace </a></button> 
 
-<table class="table">
+<table class="table m-0 p-0">
   <thead>
     <tr>
       <th scope="col">Region</th>
@@ -157,14 +155,15 @@ else{
   <tbody>
 
   <?php
+      
     $user = $_SESSION['userName'];
     $sql = "SELECT * FROM `workspaces` WHERE userName='$user'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // Output data from each row
         while ($row = $result->fetch_assoc()) {
-            $region = $row['region']
             $rowId = $row['id'];
+            $region = $row['region'];
             $city=$row['city'];
             $address=$row['address'];
             $placeType=$row['placeType'];

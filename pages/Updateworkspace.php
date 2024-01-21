@@ -1,3 +1,32 @@
+<?php
+session_start();
+
+$host = "localhost"; // database host
+$username = "test"; // database username
+$password = "12345"; // database password
+$dbname = "sadna"; // database name
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if (!isset($_GET['id'])) {
+  die('missing id');
+    
+}
+$id = $_GET['id'];
+$user = $_SESSION['userName'];
+$sql = "SELECT * FROM `workspaces` WHERE id=$id AND userName='$user' limit 1";
+$result = $conn->query($sql);
+if(!$result){
+    die( $conn->connect_error);
+}
+$row = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,11 +56,7 @@
     <link rel="icon" href="/workshop/pics/Logo.png" />
   </head>
   <body>
-    <?php
-    session_start();
-      $userName = $_SESSION['userName'];
-  ?>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
       <div class="container-fluid bg-body">
         <h1 class="logo">WorkHouse</h1>
         <button
@@ -60,12 +85,12 @@
               >
                 My Workspaces
               </a>
-              <ul class="dropdown-menu dropdown-menu-dark">
+              <ul class="dropdown-menu dropdown-menu-dark ">
                 <li>
-                  <a class="dropdown-item" href="#">Create new workspace</a>
+                  <a class="dropdown-item" href="Addworkspace.php">Create new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists workspaces</a>
+                  <a class="dropdown-item" href="Existworkspace.php">Exists workspaces</a>
                 </li>
               </ul>
             </li>
@@ -126,57 +151,57 @@
     </div>
     <div class="container-fluid align-items-center d-flex justify-content-center">
         <div class="row">
-            <form class="form" method="post" action="helpers/AddworkspaceHelper.php">
+            <form class="form" method="post" action="helpers/UpdateworkspaceHelper.php?id=<?=$id;?>">
                 <p class="title">Add New Workspace</p>
                 <label>
                 <select class="input" id="region" name="region" required>
                     <option selected disabled></option>
-                    <option value="Center">Center</option>
-                    <option option value="North">North</option>
-                    <option value="South">South</option>
+                    <option value="Center" <?= $row['region'] === 'Center'? 'selected':'';?>>Center</option>
+                    <option option value="North" <?= $row['region'] === 'North'? 'selected':'';?>>North</option>
+                    <option value="South" <?= $row['region'] === 'South'? 'selected':'';?>>South</option>
                     </select>
                     <span>Region</span>
                 </label>
                 <label>
-                    <input class="input" type="text" id="city" name="city" oninput="validateCity(this) " required>
+                    <input class="input" type="text" id="city" name="city" value=<?= $row['city'];?> oninput="validateCity(this) " required>
                     <span>City</span>
                 </label>
                 
 
 
                 <label>
-                    <input class="input" type="text" id="address" name="address" oninput="validateAddress(this)" required>
+                    <input class="input" type="text" id="address" name="address" value=<?= $row['address'];?> oninput="validateAddress(this)" required>
                     <span>Address</span>
                 </label>
                 
 
                 <label>
                 <select class="input" id="placeType" name="placeType" required>
-                    <option selected disabled></option>
-                    <option value="office">Office</option>
-                    <option option value="hangar">Hangar</option>
-                    <option value="workStation">Work Station</option>
+                    <option disabled></option>
+                    <option value="office" <?= $row['placeType'] === 'office'? 'selected':'';?> >Office</option>
+                    <option option value="hangar" <?= $row['placeType'] === 'hangar'? 'selected':'';?>>Hangar</option>
+                    <option value="workStation" <?= $row['placeType'] === 'workStation'? 'selected':'';?>>Work Station</option>
                     </select>
                     <span>Workspace type</span>
                 </label>
                 <label> 
                 <select class="input" id="rentalPeriod" name="rentalPeriod"  required>
-                    <option selected disabled></option>
-                    <option value="someDays">Some Days</option>
-                    <option value="weeks">Weeks</option>
-                    <option value="months">Months</option>
+                    <option disabled></option>
+                    <option value="someDays" <?= $row['rentalPeriod'] === 'someDays'? 'selected':'';?>>Some Days</option>
+                    <option value="weeks" <?= $row['rentalPeriod'] === 'weeks'? 'selected':'';?>>Weeks</option>
+                    <option value="months" <?= $row['rentalPeriod'] === 'months'? 'selected':'';?>>Months</option>
                 </select>
                 <span>Minimum reservation time</span>
                 </label>
 
                 <label> 
-                    <input class="input" type="number" id="dailyPrice" name="dailyPrice" min="0" required>
+                    <input class="input" type="number" id="dailyPrice" name="dailyPrice" min="0" value=<?= $row['dailyPrice'];?> required>
                     <span>Price per day</span>
                 </label>
 
 
                 <label> 
-                <input class="input" type="text" id="ownerName" name="ownerName" oninput="validateFullName(this) " required>
+                <input class="input" type="text" id="ownerName" name="ownerName"  value=<?= $row['ownerName'];?> oninput="validateFullName(this) " required>
                 <span>Owner</span>
                 </label>
                 
@@ -188,6 +213,7 @@
                     required=""
                     id="email"
                     name="email"
+                    value=<?= $row['email'];?>
                     oninput="validateEmail(this)"
                     >
                 <span>Email</span>
@@ -201,11 +227,11 @@
         
 
                 <label> 
-                <textarea class="input" id="aboutWorkspace" name="aboutWorkspace" rows="4"></textarea>
+                <textarea class="input" id="aboutWorkspace" name="aboutWorkspace" rows="4"><?= $row['aboutWorkspace'];?></textarea>
                 <span>About the Workspace</span>
                 </label>
 
-                <button class="submit" type="submit" name="submit">Add workspace</button>
+                <button class="submit" type="submit" name="submit">Update</button>
             </form>
         </div>
     </div>

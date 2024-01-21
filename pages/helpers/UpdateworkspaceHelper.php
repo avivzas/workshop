@@ -1,3 +1,4 @@
+
 <head>
     <link rel="stylesheet" href="/workshop/CSS/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,13 +40,10 @@ $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-else{
-    echo "connected";
-}
 session_start();
 
 if (isset($_POST['submit'])) {
-  $rowId = $_GET['id'];
+    $rowId = $_GET['id'];
     $region = $_POST['region'];
     $city = $_POST['city'];
     $address = $_POST['address'];
@@ -56,7 +54,7 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $pictures = $_POST['pictures'];
     $aboutWorkspace = $_POST['aboutWorkspace'];
-$userName = $_SESSION['userName'];
+    $userName = $_SESSION['userName'];
         // Insert form data into the database
         $sql = "UPDATE `workspaces` 
         SET 

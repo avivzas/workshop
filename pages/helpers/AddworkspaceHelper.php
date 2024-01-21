@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 
         // Insert form data into the database
         $sql = "INSERT INTO workspaces (region,city, address, placeType, rentalPeriod, dailyPrice, ownerName, email,pictures,aboutWorkspace, userName) 
-                VALUES ('$city','$address', '$placeType', '$rentalPeriod', '$dailyPrice', '$ownerName', '$email','$pictures','$aboutWorkspace', '" . $_SESSION['userName'] . "')";
+                VALUES ('$region','$city','$address', '$placeType', '$rentalPeriod', '$dailyPrice', '$ownerName', '$email','$pictures','$aboutWorkspace', '" . $_SESSION['userName'] . "')";
 
         if ($conn->query($sql) === TRUE) {
             echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';

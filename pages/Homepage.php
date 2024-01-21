@@ -42,7 +42,7 @@
     }
     ?>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
-      <div class="container-fluid">
+      <div class="container-fluid bg-body  ">
         <h1 class="logo">WorkHouse</h1>
         <button
           class="navbar-toggler"
@@ -55,14 +55,14 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <div class="collapse navbar-collapse bg-body" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="Homepage.php">Home</a>
+              <a class="nav-link active p-3" aria-current="page" href="Homepage.php">Home</a>
             </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle p-3"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -82,7 +82,7 @@
 
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle p-3"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -100,12 +100,12 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="mailto:SystemManager@WorkHouse.com">Contact Us</a>
+              <a class="nav-link p-3" href="mailto:SystemManager@WorkHouse.com">Contact Us</a>
             </li>
           </li>
           <li class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown-toggle p-3"
               href="#"
               role="button"
               data-bs-toggle="dropdown"
