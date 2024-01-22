@@ -77,7 +77,7 @@ session_start();
                   <a class="dropdown-item" href="Addworkspace.php">Create new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">My workspaces</a>
+                  <a class="dropdown-item" href="#">Exists workspaces</a>
                 </li>
               </ul>
             </li>
