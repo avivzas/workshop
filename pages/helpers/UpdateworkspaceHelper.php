@@ -28,10 +28,12 @@
 <?php
 
 
-$host = "localhost"; // database host
-$username = "test"; // database username
-$password = "12345"; // database password
-$dbname = "sadna"; // database name
+$ini = parse_ini_file('../../config.ini');
+
+$host = $ini['db_host']; // database host
+$username = $ini['db_user']; // database username
+$password = $ini['db_password']; // database password
+$dbname = $ini['db_name']; // database name
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $dbname);
