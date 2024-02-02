@@ -174,6 +174,7 @@ session_start();
             $ownerName=$row['ownerName'];
             $email=$row['email'];
             //$pictures=$row=$row['pictures'];
+            $pictures=base64_encode($row['pictures'])
             $aboutWorkspace=$row['aboutWorkspace'];
 
             echo "<tr>
