@@ -50,7 +50,9 @@ if (isset($_POST['submit'])) {
     $dailyPrice = $_POST['dailyPrice'];
     $ownerName = $_POST['ownerName'];
     $email = $_POST['email'];
-    $pictures = $_POST['pictures'];
+    $imageData = file_get_contents($_FILES['pictures']['tmp_name']);
+    $encodedImageData = base64_encode($imageData);
+    //$pictures = $_POST['pictures'];
     $aboutWorkspace = $_POST['aboutWorkspace'];
    
  
@@ -58,7 +60,7 @@ if (isset($_POST['submit'])) {
 
         // Insert form data into the database
         $sql = "INSERT INTO workspaces (region,city, address, placeType, rentalPeriod, dailyPrice, ownerName, email,pictures,aboutWorkspace, userName) 
-                VALUES ('$region','$city','$address', '$placeType', '$rentalPeriod', '$dailyPrice', '$ownerName', '$email','$pictures','$aboutWorkspace', '" . $_SESSION['userName'] . "')";
+                VALUES ('$region','$city','$address', '$placeType', '$rentalPeriod', '$dailyPrice', '$ownerName', '$email','$encodedImageData','$aboutWorkspace', '" . $_SESSION['userName'] . "')";
 
         if ($conn->query($sql) === TRUE) {
             echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';

@@ -54,7 +54,8 @@ if (isset($_POST['submit'])) {
     $dailyPrice = $_POST['dailyPrice'];
     $ownerName = $_POST['ownerName'];
     $email = $_POST['email'];
-    $pictures = $_POST['pictures'];
+    $imageData = file_get_contents($_FILES['pictures']['tmp_name']);
+    $encodedImageData = base64_encode($imageData);
     $aboutWorkspace = $_POST['aboutWorkspace'];
     $userName = $_SESSION['userName'];
         // Insert form data into the database
@@ -68,7 +69,7 @@ if (isset($_POST['submit'])) {
         dailyPrice=$dailyPrice, 
         ownerName='$ownerName',
          email='$email',
-         pictures='$pictures',
+         pictures='$encodedImageData',
          aboutWorkspace='$aboutWorkspace'
          WHERE id=$rowId AND userName='$userName';
          ";

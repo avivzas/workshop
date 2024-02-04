@@ -126,7 +126,7 @@
     </div>
     <div class="container-fluid align-items-center d-flex justify-content-center">
         <div class="row">
-            <form class="form" method="post" action="helpers/AddworkspaceHelper.php">
+            <form class="form" method="post"  action="helpers/AddworkspaceHelper.php" enctype="multipart/form-data">
                 <p class="title">Add New Workspace</p>
                 <label>
                 <select class="input" id="region" name="region" required>
@@ -195,7 +195,7 @@
                   
 
                 <label>
-                    <input class="input" type="file" id="pictures" name="pictures" accept="image/*" multiple>
+                    <input class="input" type="file" id="pictures" name="pictures" accept="image/*" required>
                     <span>Add photos</span>
                 </label>
         

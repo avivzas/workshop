@@ -66,7 +66,7 @@ $conn->close();
       // Check if errorMessage variable is set
       if (typeof errorMessage !== "undefined" && showErrorAlert) {
         alert(errorMessage);
-        window.location.href = "http://localhost/workshop/pages/register.html";
+        window.location.href = "http://localhost/workshop/pages/Register.html";
         
       }
     </script>

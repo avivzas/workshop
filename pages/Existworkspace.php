@@ -43,6 +43,7 @@ session_start();
       crossorigin="anonymous"
     ></script>
     <link rel="icon" href="/workshop/pics/Logo.png" />
+    
   </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
@@ -173,9 +174,12 @@ session_start();
             $dailyPrice=$row['dailyPrice'];
             $ownerName=$row['ownerName'];
             $email=$row['email'];
-            //$pictures=$row=$row['pictures'];
-            $pictures=base64_encode($row['pictures'])
+            $imageData = base64_decode($row['pictures']);
+            $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
             $aboutWorkspace=$row['aboutWorkspace'];
+            
+
+            
 
             echo "<tr>
             <th scope='row'> $region </th>
@@ -186,7 +190,7 @@ session_start();
             <td>$dailyPrice</td>
             <td>$ownerName</td>
             <td>$email</td>
-            <td></td>
+            <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
             <td>$aboutWorkspace</td>
             
             <td>
@@ -195,6 +199,7 @@ session_start();
             </td>
 
           </tr>";
+          
     }}
     ?>
   </tbody>

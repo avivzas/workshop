@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$ini = parse_ini_file('workshop/config.ini');
+$ini = parse_ini_file('../config.ini');
 
 $host = $ini['db_host']; // database host
 $username = $ini['db_user']; // database username
@@ -153,7 +153,7 @@ $row = $result->fetch_assoc();
     </div>
     <div class="container-fluid align-items-center d-flex justify-content-center">
         <div class="row">
-            <form class="form" method="post" action="helpers/UpdateworkspaceHelper.php?id=<?=$id;?>">
+            <form class="form" method="post" action="helpers/UpdateworkspaceHelper.php?id=<?=$id;?>" enctype="multipart/form-data">
                 <p class="title">Add New Workspace</p>
                 <label>
                 <select class="input" id="region" name="region" required>
@@ -223,7 +223,7 @@ $row = $result->fetch_assoc();
                   
 
                 <label>
-                    <input class="input" type="file" id="pictures" name="pictures" accept="image/*" multiple>
+                    <input class="input" type="file" id="pictures" name="pictures" accept="image/*" required>
                     <span>Add photos</span>
                 </label>
         
