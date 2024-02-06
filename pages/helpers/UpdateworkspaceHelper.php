@@ -54,11 +54,13 @@ if (isset($_POST['submit'])) {
     $dailyPrice = $_POST['dailyPrice'];
     $ownerName = $_POST['ownerName'];
     $email = $_POST['email'];
-    $imageData = file_get_contents($_FILES['pictures']['tmp_name']);
-    $encodedImageData = base64_encode($imageData);
     $aboutWorkspace = $_POST['aboutWorkspace'];
     $userName = $_SESSION['userName'];
+    if(!empty($_FILES['pictures']['tmp_name'])){
+      $imageData = file_get_contents($_FILES['pictures']['tmp_name']);
+      $encodedImageData = base64_encode($imageData);}
         // Insert form data into the database
+      if(empty($encodedImageData )){
         $sql = "UPDATE `workspaces` 
         SET 
         region = '$region',
@@ -69,10 +71,24 @@ if (isset($_POST['submit'])) {
         dailyPrice=$dailyPrice, 
         ownerName='$ownerName',
          email='$email',
-         pictures='$encodedImageData',
          aboutWorkspace='$aboutWorkspace'
          WHERE id=$rowId AND userName='$userName';
-         ";
+         ";}
+         else{  
+          $sql = "UPDATE `workspaces` 
+          SET 
+          region = '$region',
+          city='$city', 
+          address='$address', 
+          placeType='$placeType', 
+          rentalPeriod='$rentalPeriod', 
+          dailyPrice=$dailyPrice, 
+          ownerName='$ownerName',
+           email='$email',
+           pictures='$encodedImageData',
+           aboutWorkspace='$aboutWorkspace'
+           WHERE id=$rowId AND userName='$userName';
+           ";}
         if ($conn->query($sql) === TRUE) {
             echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';
             echo 'Thank you ,' . $_POST['ownerName'] . ' your workspace successfully updated ';

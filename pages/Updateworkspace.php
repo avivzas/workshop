@@ -165,14 +165,14 @@ $row = $result->fetch_assoc();
                     <span>Region</span>
                 </label>
                 <label>
-                    <input class="input" type="text" id="city" name="city" value=<?= $row['city'];?> oninput="validateCity(this) " required>
+                    <input class="input" type="text" id="city" name="city" value="<?= $row['city'];?>" oninput="validateCity(this) " required>
                     <span>City</span>
                 </label>
                 
 
 
                 <label>
-                    <input class="input" type="text" id="address" name="address" value=<?= $row['address'];?> oninput="validateAddress(this)" required>
+                    <input class="input" type="text" id="address" name="address" value="<?= $row['address'];?>" oninput="validateAddress(this)" required>
                     <span>Address</span>
                 </label>
                 
@@ -180,18 +180,18 @@ $row = $result->fetch_assoc();
                 <label>
                 <select class="input" id="placeType" name="placeType" required>
                     <option disabled></option>
-                    <option value="office" <?= $row['placeType'] === 'office'? 'selected':'';?> >Office</option>
-                    <option option value="hangar" <?= $row['placeType'] === 'hangar'? 'selected':'';?>>Hangar</option>
-                    <option value="workStation" <?= $row['placeType'] === 'workStation'? 'selected':'';?>>Work Station</option>
+                    <option value="Office" <?= $row['placeType'] === 'Office'? 'selected':'';?> >Office</option>
+                    <option option value="Hangar" <?= $row['placeType'] === 'Hangar'? 'selected':'';?>>Hangar</option>
+                    <option value="Work station" <?= $row['placeType'] === 'Work station'? 'selected':'';?>>Work Station</option>
                     </select>
                     <span>Workspace type</span>
                 </label>
                 <label> 
                 <select class="input" id="rentalPeriod" name="rentalPeriod"  required>
                     <option disabled></option>
-                    <option value="someDays" <?= $row['rentalPeriod'] === 'someDays'? 'selected':'';?>>Some Days</option>
-                    <option value="weeks" <?= $row['rentalPeriod'] === 'weeks'? 'selected':'';?>>Weeks</option>
-                    <option value="months" <?= $row['rentalPeriod'] === 'months'? 'selected':'';?>>Months</option>
+                    <option value="Some days" <?= $row['rentalPeriod'] === 'Some days'? 'selected':'';?>>Some Days</option>
+                    <option value="Weeks" <?= $row['rentalPeriod'] === 'Weeks'? 'selected':'';?>>Weeks</option>
+                    <option value="Months" <?= $row['rentalPeriod'] === 'Months'? 'selected':'';?>>Months</option>
                 </select>
                 <span>Minimum reservation time</span>
                 </label>
@@ -203,7 +203,7 @@ $row = $result->fetch_assoc();
 
 
                 <label> 
-                <input class="input" type="text" id="ownerName" name="ownerName"  value=<?= $row['ownerName'];?> oninput="validateFullName(this) " required>
+                <input class="input" type="text" id="ownerName" name="ownerName"  value="<?= $row['ownerName'];?>" oninput="validateFullName(this) " required>
                 <span>Owner</span>
                 </label>
                 
@@ -223,7 +223,7 @@ $row = $result->fetch_assoc();
                   
 
                 <label>
-                    <input class="input" type="file" id="pictures" name="pictures" accept="image/*" required>
+                    <input class="input" type="file" id="pictures" name="pictures" accept="image/*" >
                     <span>Add photos</span>
                 </label>
         

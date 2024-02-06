@@ -52,7 +52,6 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $imageData = file_get_contents($_FILES['pictures']['tmp_name']);
     $encodedImageData = base64_encode($imageData);
-    //$pictures = $_POST['pictures'];
     $aboutWorkspace = $_POST['aboutWorkspace'];
    
  
