@@ -105,7 +105,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li>
-                <a class="dropdown-item" href="#">Edit profile</a>
+                <a class="dropdown-item" href="EditProfile.php">Edit profile</a>
               </li>
               <li>
                 <a class="dropdown-item" href="Login.php">Sign Out</a>

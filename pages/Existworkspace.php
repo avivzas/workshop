@@ -120,7 +120,7 @@ session_start();
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li>
-                <a class="dropdown-item" href="#">Edit profile</a>
+                <a class="dropdown-item" href="EditProfile.php">Edit profile</a>
               </li>
               <li>
                 <a class="dropdown-item" href="Login.php">Sign Out</a>
@@ -134,7 +134,12 @@ session_start();
 
 <div class="container-fluid p-0 m-0 ">
 
+
+<div class="d-flex justify-content-center align-items-center m-0  pt-5 pb-0 ">
+    <h1 class="greeting">My Workspaces</h1></div>
+
 <button class="btn btn-primary my-5 "> <a href="Addworkspace.php" class="text-light"> Add New Workspace </a></button> 
+
 
 <table class="table m-0 p-0">
   <thead>

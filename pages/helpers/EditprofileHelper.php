@@ -24,7 +24,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="icon" href="/workshop/pics/Logo.png" />
   </head>
-<?php
+  <?php
+
+
 $ini = parse_ini_file('../../config.ini');
 
 $host = $ini['db_host']; // database host
@@ -42,32 +44,39 @@ if ($conn->connect_error) {
 session_start();
 
 if (isset($_POST['submit'])) {
-    $region = $_POST['region'];
-    $city = $_POST['city'];
-    $address = $_POST['address'];
-    $placeType = $_POST['placeType'];
-    $rentalPeriod = $_POST['rentalPeriod'];
-    $dailyPrice = $_POST['dailyPrice'];
-    $ownerName = $_POST['ownerName'];
-    $email = $_POST['email'];
-    $imageData = file_get_contents($_FILES['pictures']['tmp_name']);
-    $encodedImageData = base64_encode($imageData);
-    $aboutWorkspace = $_POST['aboutWorkspace'];
-   
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $userName = $_SESSION['userName'];
+    if(!empty($_POST['pass'])){
+    $pass = $_POST['pass'];}
 
-        // Insert form data into the database
-        $sql = "INSERT INTO workspaces (region,city, address, placeType, rentalPeriod, dailyPrice, ownerName, email,pictures,aboutWorkspace, userName) 
-                VALUES ('$region','$city','$address', '$placeType', '$rentalPeriod', '$dailyPrice', '$ownerName', '$email','$encodedImageData','$aboutWorkspace', '" . $_SESSION['userName'] . "')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';
-            echo 'Thank you ,' . $_POST['ownerName'] . ' your workspace successfully added ';
-            echo '<button class="submit m-3 " onclick="location.href=\'/workshop/pages/Homepage.php\'">Back to the home page</button>';
-            echo '</div>';
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+    if (empty($pass)) {
+        $sql = "UPDATE `registrations` 
+        SET 
+        firstName = '$firstName',
+        lastName='$lastName'
+        WHERE userName='$userName';
+         ";
         }
-    
+     else {
+        $sql = "UPDATE `registrations` 
+        SET 
+        firstName = '$firstName',
+        lastName='$lastName',  
+        pass='$pass'
+        WHERE userName='$userName';
+         ";
+    }
+    if ($conn->query($sql) === TRUE) {
+        echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';
+        echo 'Thank you ,' . $_POST['firstName'] . ' your profile successfully updated ';
+        echo '<button class="submit m-3 " onclick="location.href=\'/workshop/pages/Homepage.php\'">Back to the home page</button>';
+        echo '</div>';
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
 }
+
+// Close the database connection
 $conn->close();
 ?>

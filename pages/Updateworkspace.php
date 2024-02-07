@@ -132,7 +132,7 @@ $row = $result->fetch_assoc();
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li>
-                <a class="dropdown-item" href="#">Edit profile</a>
+                <a class="dropdown-item" href="EditProfile.php">Edit profile</a>
               </li>
               <li>
                 <a class="dropdown-item" href="Login.php">Sign Out</a>
@@ -154,7 +154,7 @@ $row = $result->fetch_assoc();
     <div class="container-fluid align-items-center d-flex justify-content-center">
         <div class="row">
             <form class="form" method="post" action="helpers/UpdateworkspaceHelper.php?id=<?=$id;?>" enctype="multipart/form-data">
-                <p class="title">Add New Workspace</p>
+                <p class="title">Update Workspace</p>
                 <label>
                 <select class="input" id="region" name="region" required>
                     <option selected disabled></option>

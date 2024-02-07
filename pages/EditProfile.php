@@ -1,3 +1,29 @@
+<?php
+session_start();
+
+$ini = parse_ini_file('../config.ini');
+
+$host = $ini['db_host']; // database host
+$username = $ini['db_user']; // database username
+$password = $ini['db_password']; // database password
+$dbname = $ini['db_name']; // database name
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$user = $_SESSION['userName'];
+$sql = "SELECT * FROM `registrations` WHERE userName='$user' limit 1";
+$result = $conn->query($sql);
+if(!$result){
+    die( $conn->connect_error);
+}
+$row = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,22 +53,8 @@
     <link rel="icon" href="/workshop/pics/Logo.png" />
   </head>
   <body>
-    <?php
-    session_start();
-    if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
-        header('Location: http://localhost/workshop/pages/Login.php');
-        exit;
-    } else {
-        echo "<script>
-        window.onload = function() {
-            var usernameDiv = document.getElementById('greeting');
-            usernameDiv.innerHTML =  'Hello, " . $_SESSION['firstName'] . "';
-            }
-        </script>";
-    }
-    ?>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
-      <div class="container-fluid bg-body  ">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
+      <div class="container-fluid bg-body">
         <h1 class="logo">WorkHouse</h1>
         <button
           class="navbar-toggler"
@@ -115,7 +127,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li>
-                <a class="dropdown-item" href="EditProfile.php">Edit profile</a>
+                <a class="dropdown-item" href="#">Edit profile</a>
               </li>
               <li>
                 <a class="dropdown-item" href="Login.php">Sign Out</a>
@@ -134,72 +146,110 @@
         width="200px"
       />
     </div>
-    <div><h1 class="greeting m-0 " id="greeting" ></h1></div>
-    <div class="d-flex justify-content-center align-items-center m-0 p-2">
-    <div id="carouselExample" class="carousel slide" style="max-width: 600px;">
-  <div class="carousel-inner  " >
-    <div class="carousel-item active" >
-      <img src="/workshop/pics/space1.jpg" class="d-block w-100" alt="space 1" >
-    </div>
-    <div class="carousel-item">
-      <img src="/workshop/pics/space2.jpg" class="d-block w-100" alt="space 2">
-    </div>
-    <div class="carousel-item">
-      <img src="/workshop/pics/space3.jpg" class="d-block w-100" alt="space 3">
-    </div>
-    <div class="carousel-item">
-      <img src="/workshop/pics/space4.webp" class="d-block w-100" alt="space 4">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-    </div>
-    <div class="d-flex justify-content-center align-items-center m-0  p-0">
-    <h1 class="greeting">Meet our developers</h1></div>
-    <div class="d-flex justify-content-center  m-0  p-0">
-      <div class="card m-3 border-black border-2 rounded-2 " style="width: 18rem;">
-        <img src="/workshop/pics/aviv.jpg" class="card-img-top" alt="aviv">
-        <div class="card-body">
-        <p class="card-text"><h3 >Aviv shmilovich</h3><br>How i see my workspace? 
-        <br>where ever i want! </p>
-        </div>
-      </div>
-      <div class="card m-3 border-black border-2 rounded-2 " style="width: 18rem;">
-        <img src="/workshop/pics/tslil.jpeg" class="card-img-top" alt="aviv">
-        <div class="card-body">
-        <p class="card-text"><h3 >Tslil nagar</h3><br>Looking to rent your extra workspace? 
-        <br>we got you covered </p>
-        </div>
-      </div>
-      <div class="card m-3 border-black rounded-2 border-2" style="width: 18rem;">
-        <img src="/workshop/pics/liad.jpeg" class="card-img-top" alt="aviv">
-        <div class="card-body">
-        <p class="card-text  "><h3 >Liad Arami</h3><br>Im done working at coffee houses  
-        </p>
-        </div>
-      </div>
-      <div class="card m-3 border-black rounded-2 border-2" style="width: 18rem;">
-        <img src="/workshop/pics/mark.jpg" class="card-img-top" alt="aviv">
-        <div class="card-body">
-        <p class="card-text  "><h3 >Mark kravetz</h3><br>Start your journey with us today!</p>
-        </div>
-      </div>
-    </div>
-    <footer><p>©20241W74</p></footer>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-GLhlTQ8iKt6iOpSkjE+LBgEFs7otFJbDRlwHzzl5u"
-    crossorigin="anonymous"
-  ></script>
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  </body>
+    <main>
+      <div
+        class="container-fluid align-items-center d-flex justify-content-center"
+      >
+        <div class="row">
+          <form
+            method="post"
+            action="helpers/EditprofileHelper.php"
+            class="form needs-validation"
+          >
+            <p class="title">Update profile</p>
+            <div class="flex">
+              <label>
+                <input
+                  class="input"
+                  type="text"
+                  placeholder=""
+                  required=""
+                  id="firstName"
+                  name="firstName"
+                  value="<?= $row['firstName'];?>"
+                  oninput="validateName(this)"
+                />
+                <span>First name</span>
+              </label>
 
+              <label>
+                <input
+                  class="input"
+                  type="text"
+                  placeholder=""
+                  required=""
+                  id="lastName"
+                  name="lastName"
+                  value="<?= $row['lastName'];?>"
+                  oninput="validateName(this)"
+                />
+                <span>Last name</span>
+              </label>
+            </div>
+            <label>
+              <input
+                class="input"
+                type="password"
+                id="pass"
+                name="pass"
+                placeholder=""
+                
+              />
+              <span>New Password</span>
+            </label>
+            <label>
+              <input
+                class="input"
+                type="password"
+                id="confirmPass"
+                placeholder=""
+                
+              />
+              <span>Confirm new password</span>
+            </label>
+
+            <label>
+              <input
+                class="input"
+                type="text"
+                placeholder=""
+                required=""
+                id="userName"
+                value="<?= $row['userName'];?>"
+                disabled
+                oninput="validateName(this) "
+
+              />
+              <span>User Name</span>
+            </label>
+
+            <label>
+              <input
+                class="input"
+                type="email"
+                placeholder=""
+                required=""
+                id="email"
+                value="<?= $row['email'];?>"
+                disabled
+                oninput="validateEmail(this)"
+              />
+              <span>Email</span>
+            </label>
+
+            <button class="submit" type="submit" name="submit">Update</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer><p>©20241W74</p></footer>
+    <script src="/workshop/JS/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-GLhlTQ8iKt6iOpSkjE+LBgEFs7otFJbDRlwHzzl5u"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
+
