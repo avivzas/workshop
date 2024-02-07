@@ -47,6 +47,7 @@ if (isset($_POST['submit'])) {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $userName = $_SESSION['userName'];
+    $email = $_POST['email'];
     if(!empty($_POST['pass'])){
     $pass = $_POST['pass'];}
 
@@ -54,20 +55,32 @@ if (isset($_POST['submit'])) {
         $sql = "UPDATE `registrations` 
         SET 
         firstName = '$firstName',
-        lastName='$lastName'
+        lastName='$lastName',
+        email = '$email'
         WHERE userName='$userName';
-         ";
+         
+        UPDATE `workspaces` 
+        SET 
+        email = '$email'
+        WHERE userName='$userName';
+         ";         
         }
      else {
         $sql = "UPDATE `registrations` 
         SET 
         firstName = '$firstName',
         lastName='$lastName',  
+        email = '$email',
         pass='$pass'
         WHERE userName='$userName';
-         ";
+
+        UPDATE `workspaces` 
+        SET 
+        email = '$email'
+        WHERE userName='$userName';
+         ";         
     }
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->multi_query($sql) === TRUE) {
         echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';
         echo 'Thank you ,' . $_POST['firstName'] . ' your profile successfully updated ';
         echo '<button class="submit m-3 " onclick="location.href=\'/workshop/pages/Homepage.php\'">Back to the home page</button>';

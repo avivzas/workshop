@@ -185,7 +185,36 @@ $row = $result->fetch_assoc();
                 />
                 <span>Last name</span>
               </label>
+              
             </div>
+            <label>
+              <input
+                class="input"
+                type="email"
+                placeholder=""
+                required=""
+                id="email"
+                name= 'email'
+                value="<?= $row['email'];?>"
+                oninput="validateEmail(this)"
+              />
+              <span>Email</span>
+            </label>
+            <label>
+              <input
+                class="input"
+                type="text"
+                placeholder=""
+                required=""
+                id="userName"
+                value="<?= $row['userName'];?>"
+                disabled
+                oninput="validateName(this) "
+
+              />
+              <span>User Name</span>
+            </label>
+
             <label>
               <input
                 class="input"
@@ -208,34 +237,9 @@ $row = $result->fetch_assoc();
               <span>Confirm new password</span>
             </label>
 
-            <label>
-              <input
-                class="input"
-                type="text"
-                placeholder=""
-                required=""
-                id="userName"
-                value="<?= $row['userName'];?>"
-                disabled
-                oninput="validateName(this) "
 
-              />
-              <span>User Name</span>
-            </label>
 
-            <label>
-              <input
-                class="input"
-                type="email"
-                placeholder=""
-                required=""
-                id="email"
-                value="<?= $row['email'];?>"
-                disabled
-                oninput="validateEmail(this)"
-              />
-              <span>Email</span>
-            </label>
+
 
             <button class="submit" type="submit" name="submit">Update</button>
           </form>

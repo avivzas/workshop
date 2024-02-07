@@ -154,6 +154,8 @@ session_start();
       <th scope="col">Email</th>
       <th scope="col">Pictures</th>
       <th scope="col">About</th>
+      <th scope="col">reserved</th>
+      <th scope="col">dates</th>
       <th scope="col">Options</th>
     </tr>
 
@@ -182,6 +184,8 @@ session_start();
             $imageData = base64_decode($row['pictures']);
             $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
             $aboutWorkspace=$row['aboutWorkspace'];
+            $reserved=$row['reserved'];
+            $dates=$row['dates'];
             
 
             
@@ -197,6 +201,8 @@ session_start();
             <td>$email</td>
             <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
             <td>$aboutWorkspace</td>
+            <td>" . ($reserved == 0 ? "no" : "yes") . "</td>
+            <td>$dates</td>
             
             <td>
               <button class='btn btn-primary'><a href='Updateworkspace.php?id=$rowId' class='text-light'>Update</a></button>
