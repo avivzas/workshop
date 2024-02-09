@@ -247,6 +247,7 @@ $row = $result->fetch_assoc();
       </div>
     </main>
     <footer><p>©20241W74</p></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/workshop/JS/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script
