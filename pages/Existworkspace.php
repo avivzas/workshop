@@ -100,7 +100,7 @@ session_start();
                   <a class="dropdown-item" href="#">Search new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists Reservations</a>
+                  <a class="dropdown-item" href="ExistReservations.php">Exists Reservations</a>
                 </li>
               </ul>
             </li>
@@ -138,7 +138,7 @@ session_start();
 <div class="d-flex justify-content-center align-items-center m-0  pt-5 pb-0 ">
     <h1 class="greeting">My Workspaces</h1></div>
 
-<button class="btn btn-primary my-5 "> <a href="Addworkspace.php" class="text-light"> Add New Workspace </a></button> 
+<button class="btn btn-primary my-5 mx-5  "> <a href="Addworkspace.php" class="text-light"> Add New Workspace </a></button> 
 
 
 <table class="table m-0 p-0">
@@ -150,12 +150,9 @@ session_start();
       <th scope="col">Place Type</th>
       <th scope="col">Rental period</th>
       <th scope="col">Daily price</th>
-      <th scope="col">Owner name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Pictures</th>
+      <th scope="col">Picture</th>
       <th scope="col">About</th>
       <th scope="col">reserved</th>
-      <th scope="col">dates</th>
       <th scope="col">Options</th>
     </tr>
 
@@ -185,7 +182,7 @@ session_start();
             $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
             $aboutWorkspace=$row['aboutWorkspace'];
             $reserved=$row['reserved'];
-            $dates=$row['dates'];
+            
             
 
             
@@ -197,19 +194,25 @@ session_start();
             <td>$placeType</td>
             <td>$rentalPeriod</td>
             <td>$dailyPrice</td>
-            <td>$ownerName</td>
-            <td>$email</td>
             <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
             <td>$aboutWorkspace</td>
-            <td>" . ($reserved == 0 ? "no" : "yes") . "</td>
-            <td>$dates</td>
+            <td>" . ($reserved == 0 ? "no" : "yes") . "</td>";
             
-            <td>
-              <button class='btn btn-primary'><a href='Updateworkspace.php?id=$rowId' class='text-light'>Update</a></button>
-              <button class='btn btn-danger'> <a href='Delete.php?delete=$rowId' class='text-light'>Delete</a></button>
-            </td>
-
-          </tr>";
+    if($reserved != 0) {
+        echo "<td>
+                  <button class='btn btn-primary'><a href='Updateworkspace.php?id=$rowId' class='text-light'>Update</a></button>
+                  <button class='btn btn-primary'><a href='MySapceReservations.php?id=$rowId' class='text-light'>Reservations</a></button>
+                  <button class='btn btn-danger'><a href='Delete.php?delete=$rowId' class='text-light'>Delete</a></button>
+              </td>";
+    } else {
+        echo "<td>
+                  <button class='btn btn-primary'><a href='Updateworkspace.php?id=$rowId' class='text-light'>Update</a></button>
+                  <button class='btn btn-danger'><a href='Delete.php?delete=$rowId' class='text-light'>Delete</a></button>
+              </td>";
+    }
+    
+    echo "</tr>";
+    
           
     }}
     ?>

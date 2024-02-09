@@ -112,7 +112,7 @@ $row = $result->fetch_assoc();
                   <a class="dropdown-item" href="#">Search new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists Reservations</a>
+                  <a class="dropdown-item" href="ExistReservations.php">Exists Reservations</a>
                 </li>
               </ul>
             </li>
