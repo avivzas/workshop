@@ -138,58 +138,82 @@ $id = $_GET['id'];
       </div>
     </nav>
 
-<div class="container-fluid p-0 m-0 ">
+<    <div class="container-fluid p-0 m-0">
+        <div class="d-flex justify-content-center align-items-center m-0 pt-5 pb-0">
+            <h1 class="greeting">My Workspaces Reservations</h1>
+        </div>
 
+        <button class="btn btn-primary my-5 mx-5 px-5 py-2">
+            <a href="Existworkspace.php" class="text-light">Back</a>
+        </button>
 
-<div class="d-flex justify-content-center align-items-center m-0  pt-5 pb-0 ">
-    <h1 class="greeting">My Workspaces Reservations</h1></div>
+        <!-- Future Reservations Table -->
+        <h2>Future Reservations</h2>
+        <table class="table m-0 p-0">
+            <thead>
+                <tr>
+                    <th scope="col">Full name</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $today = date('Y-m-d');
+                $sqlFuture = "SELECT * FROM `reservations` WHERE spaceID=$id AND endDate <= '$today'";
+                $resultFuture = $conn->query($sqlFuture);
+                if ($resultFuture->num_rows > 0) {
+                    while ($row = $resultFuture->fetch_assoc()) {
+                        echo "<tr>
+                            <th scope='row'>" . htmlspecialchars($row['fullName']) . "</th>
+                            <td>" . htmlspecialchars($row['startDate']) . "</td>
+                            <td>" . htmlspecialchars($row['endDate']) . "</td>
+                            <td>
+                                <button class='btn btn-primary'><a href='mailto:" . htmlspecialchars($row['email']) . "' class='text-light'>Contact</a></button>
+                            </td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>No future reservations found.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
 
-<button class="btn btn-primary my-5 mx-5 px-5 py-2 "> <a href="Existworkspace.php" class="text-light"> Back </a></button> 
-
-
-<table class="table m-0 p-0">
-  <thead>
-    <tr>
-      <th scope="col">Full name</th>
-      <th scope="col">Start Date</th>
-      <th scope="col">End Date</th>
-      <th scope="col">Options</th>
-    </tr>
-
-
-  </thead> 
-
-  <tbody>
-
-  <?php
-    $user = $_SESSION['userName'];
-    $sql = "SELECT * FROM `reservations` WHERE userName='$user' AND spaceID=$id ";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        // Output data from each row
-        while ($row = $result->fetch_assoc()) {
-            $fullName = $row['fullName'];
-            $startDate = $row['startDate'];
-            $endDate = $row['endDate'];
-            $email = $row['email'];
-
-            echo "<tr>
-            <th scope='row'> $fullName </th>
-            <td>$startDate</td>
-            <td>$endDate</td>
-
-            <td>
-              <button class='btn btn-primary'><a href='mailto:$email' class='text-light'>Contact</a></button>
-            </td>
-
-          </tr>";
-          
-    }}
-    ?>
-  </tbody>
-</table>
-
-</div>
+        <!-- Past Reservations Table -->
+        <h2>Past Reservations</h2>
+        <table class="table m-0 p-0">
+            <thead>
+                <tr>
+                    <th scope="col">Full name</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sqlPast = "SELECT * FROM `reservations` WHERE spaceID=$id AND endDate < '$today'";
+                $resultPast = $conn->query($sqlPast);
+                if ($resultPast->num_rows > 0) {
+                    while ($row = $resultPast->fetch_assoc()) {
+                        echo "<tr>
+                            <th scope='row'>" . htmlspecialchars($row['fullName']) . "</th>
+                            <td>" . htmlspecialchars($row['startDate']) . "</td>
+                            <td>" . htmlspecialchars($row['endDate']) . "</td>
+                            <td>
+                                <button class='btn btn-primary'><a href='mailto:" . htmlspecialchars($row['email']) . "' class='text-light'>Contact</a></button>
+                            </td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>No past reservations found.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
 <footer><p>©20241W74</p></footer>
 </body>

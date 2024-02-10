@@ -28,6 +28,20 @@
   </head>
   <body>
     <?php
+    $ini = parse_ini_file('../config.ini');
+
+    $host = $ini['db_host']; // database host
+    $username = $ini['db_user']; // database username
+    $password = $ini['db_password']; // database password
+    $dbname = $ini['db_name']; // database name
+    
+    // Create connection
+    $conn = new mysqli($host, $username, $password, $dbname);
+    
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     session_start();
     if (!isset($_SESSION['authenticated']) || !$_SESSION['authenticated']) {
         header('Location: http://localhost/workshop/pages/Login.php');
@@ -40,6 +54,54 @@
             }
         </script>";
     }
+    // Function to update workspace reservation status
+function updateWorkspaceReservationStatus($conn) {
+  $today = date('Y-m-d'); // Today's date in 'YYYY-MM-DD' format
+
+  // First, set reserved to 0 for workspaces with past reservations
+  $sqlPast = "SELECT spaceId FROM reservations WHERE endDate < ? AND spaceId IN (SELECT id FROM workspaces WHERE reserved = 1)";
+  $stmtPast = $conn->prepare($sqlPast);
+  $stmtPast->bind_param("s", $today);
+  $stmtPast->execute();
+  $resultPast = $stmtPast->get_result();
+
+  while ($rowPast = $resultPast->fetch_assoc()) {
+      $spaceId = $rowPast['spaceId'];
+      $updateSqlPast = "UPDATE workspaces SET reserved = 0 WHERE id = ?";
+      $updateStmtPast = $conn->prepare($updateSqlPast);
+      $updateStmtPast->bind_param("i", $spaceId);
+      $updateStmtPast->execute();
+      $updateStmtPast->close();
+  }
+
+  $stmtPast->close();
+
+  // Then, set reserved to 1 for workspaces with future reservations
+  $sqlFuture = "SELECT spaceId FROM reservations WHERE endDate >= ? AND spaceId IN (SELECT id FROM workspaces WHERE reserved = 0)";
+  $stmtFuture = $conn->prepare($sqlFuture);
+  $stmtFuture->bind_param("s", $today);
+  $stmtFuture->execute();
+  $resultFuture = $stmtFuture->get_result();
+
+  while ($rowFuture = $resultFuture->fetch_assoc()) {
+      $spaceId = $rowFuture['spaceId'];
+      $updateSqlFuture = "UPDATE workspaces SET reserved = 1 WHERE id = ?";
+      $updateStmtFuture = $conn->prepare($updateSqlFuture);
+      $updateStmtFuture->bind_param("i", $spaceId);
+      $updateStmtFuture->execute();
+      $updateStmtFuture->close();
+  }
+  $stmtFuture->close();
+
+    // Additionally, set reserved to 0 for workspaces without any active reservations
+    $sqlNoMatch = "UPDATE workspaces SET reserved = 0 WHERE id NOT IN (SELECT spaceId FROM reservations WHERE endDate >= ?)";
+    $stmtNoMatch = $conn->prepare($sqlNoMatch);
+    $stmtNoMatch->bind_param("s", $today);
+    $stmtNoMatch->execute();
+    $stmtNoMatch->close();
+}
+// Update workspace reservation status before displaying them
+updateWorkspaceReservationStatus($conn);
     ?>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
       <div class="container-fluid bg-body  ">
@@ -92,7 +154,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a class="dropdown-item" href="#">Search new workspace</a>
+                  <a class="dropdown-item" href="SearchWorkspace.php">Search new workspace</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="ExistReservations.php">Exists Reservations</a>

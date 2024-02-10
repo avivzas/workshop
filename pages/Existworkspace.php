@@ -34,6 +34,7 @@ function updateWorkspaceReservationStatus($conn) {
       $updateStmtPast->execute();
       $updateStmtPast->close();
   }
+
   $stmtPast->close();
 
   // Then, set reserved to 1 for workspaces with future reservations
@@ -52,8 +53,14 @@ function updateWorkspaceReservationStatus($conn) {
       $updateStmtFuture->close();
   }
   $stmtFuture->close();
-}
 
+    // Additionally, set reserved to 0 for workspaces without any active reservations
+    $sqlNoMatch = "UPDATE workspaces SET reserved = 0 WHERE id NOT IN (SELECT spaceId FROM reservations WHERE endDate >= ?)";
+    $stmtNoMatch = $conn->prepare($sqlNoMatch);
+    $stmtNoMatch->bind_param("s", $today);
+    $stmtNoMatch->execute();
+    $stmtNoMatch->close();
+}
 // Update workspace reservation status before displaying them
 updateWorkspaceReservationStatus($conn);
 ?>
@@ -224,9 +231,7 @@ updateWorkspaceReservationStatus($conn);
             $aboutWorkspace=$row['aboutWorkspace'];
             $reserved=$row['reserved'];
             
-            
 
-            
 
             echo "<tr>
             <th scope='row'> $region </th>
@@ -246,6 +251,7 @@ updateWorkspaceReservationStatus($conn);
               </td>";
     } else {
         echo "<td>
+                <button class='btn btn-primary'><a href='MySapceReservations.php?id=$rowId' class='text-light'>Reservations</a></button>
                   <button class='btn btn-primary'><a href='Updateworkspace.php?id=$rowId' class='text-light'>Update</a></button>
                   <button class='btn btn-danger'><a href='Delete.php?delete=$rowId' class='text-light'>Delete</a></button>
               </td>";
