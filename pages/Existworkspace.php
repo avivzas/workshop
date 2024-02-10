@@ -14,7 +14,50 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 session_start();
+
+// Function to update workspace reservation status
+function updateWorkspaceReservationStatus($conn) {
+  $today = date('Y-m-d'); // Today's date in 'YYYY-MM-DD' format
+
+  // First, set reserved to 0 for workspaces with past reservations
+  $sqlPast = "SELECT spaceId FROM reservations WHERE endDate < ? AND spaceId IN (SELECT id FROM workspaces WHERE reserved = 1)";
+  $stmtPast = $conn->prepare($sqlPast);
+  $stmtPast->bind_param("s", $today);
+  $stmtPast->execute();
+  $resultPast = $stmtPast->get_result();
+
+  while ($rowPast = $resultPast->fetch_assoc()) {
+      $spaceId = $rowPast['spaceId'];
+      $updateSqlPast = "UPDATE workspaces SET reserved = 0 WHERE id = ?";
+      $updateStmtPast = $conn->prepare($updateSqlPast);
+      $updateStmtPast->bind_param("i", $spaceId);
+      $updateStmtPast->execute();
+      $updateStmtPast->close();
+  }
+  $stmtPast->close();
+
+  // Then, set reserved to 1 for workspaces with future reservations
+  $sqlFuture = "SELECT spaceId FROM reservations WHERE endDate >= ? AND spaceId IN (SELECT id FROM workspaces WHERE reserved = 0)";
+  $stmtFuture = $conn->prepare($sqlFuture);
+  $stmtFuture->bind_param("s", $today);
+  $stmtFuture->execute();
+  $resultFuture = $stmtFuture->get_result();
+
+  while ($rowFuture = $resultFuture->fetch_assoc()) {
+      $spaceId = $rowFuture['spaceId'];
+      $updateSqlFuture = "UPDATE workspaces SET reserved = 1 WHERE id = ?";
+      $updateStmtFuture = $conn->prepare($updateSqlFuture);
+      $updateStmtFuture->bind_param("i", $spaceId);
+      $updateStmtFuture->execute();
+      $updateStmtFuture->close();
+  }
+  $stmtFuture->close();
+}
+
+// Update workspace reservation status before displaying them
+updateWorkspaceReservationStatus($conn);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -162,7 +205,7 @@ session_start();
   <tbody>
 
   <?php
-      
+
     $user = $_SESSION['userName'];
     $sql = "SELECT * FROM `workspaces` WHERE userName='$user'";
     $result = $conn->query($sql);
@@ -222,5 +265,6 @@ session_start();
 </div>
 
 <footer><p>©20241W74</p></footer>
+
 </body>
 </html>
