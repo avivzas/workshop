@@ -182,8 +182,10 @@ if ($conn->connect_error) {
 FROM 
     workspaces
 JOIN 
-    reservations ON workspaces.id = reservations.spaceID;
- ";
+    reservations ON workspaces.id = reservations.spaceID
+WHERE 
+    workspaces.userName = '" . $user . "';
+";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // Output data from each row
