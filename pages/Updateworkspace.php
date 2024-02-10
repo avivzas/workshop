@@ -186,15 +186,6 @@ $row = $result->fetch_assoc();
                     </select>
                     <span>Workspace type</span>
                 </label>
-                <label> 
-                <select class="input" id="rentalPeriod" name="rentalPeriod"  required>
-                    <option disabled></option>
-                    <option value="Some days" <?= $row['rentalPeriod'] === 'Some days'? 'selected':'';?>>Some Days</option>
-                    <option value="Weeks" <?= $row['rentalPeriod'] === 'Weeks'? 'selected':'';?>>Weeks</option>
-                    <option value="Months" <?= $row['rentalPeriod'] === 'Months'? 'selected':'';?>>Months</option>
-                </select>
-                <span>Minimum reservation time</span>
-                </label>
 
                 <label> 
                     <input class="input" type="number" id="dailyPrice" name="dailyPrice" min="0" value=<?= $row['dailyPrice'];?> required>

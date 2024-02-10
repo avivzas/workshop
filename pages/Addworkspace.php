@@ -159,15 +159,6 @@
                     </select>
                     <span>Workspace type</span>
                 </label>
-                <label> 
-                <select class="input" id="rentalPeriod" name="rentalPeriod"  required>
-                    <option selected disabled></option>
-                    <option value="someDays">Some Days</option>
-                    <option value="weeks">Weeks</option>
-                    <option value="months">Months</option>
-                </select>
-                <span>Minimum reservation time</span>
-                </label>
 
                 <label> 
                     <input class="input" type="number" id="dailyPrice" name="dailyPrice" min="0" required>

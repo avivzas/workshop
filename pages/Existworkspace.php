@@ -191,7 +191,6 @@ updateWorkspaceReservationStatus($conn);
       <th scope="col">City</th>
       <th scope="col">Address</th>
       <th scope="col">Place Type</th>
-      <th scope="col">Rental period</th>
       <th scope="col">Daily price</th>
       <th scope="col">Picture</th>
       <th scope="col">About</th>
@@ -217,7 +216,6 @@ updateWorkspaceReservationStatus($conn);
             $city=$row['city'];
             $address=$row['address'];
             $placeType=$row['placeType'];
-            $rentalPeriod=$row['rentalPeriod'];
             $dailyPrice=$row['dailyPrice'];
             $ownerName=$row['ownerName'];
             $email=$row['email'];
@@ -235,7 +233,6 @@ updateWorkspaceReservationStatus($conn);
             <td>$city</td>
             <td>$address</td>
             <td>$placeType</td>
-            <td>$rentalPeriod</td>
             <td>$dailyPrice</td>
             <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
             <td>$aboutWorkspace</td>

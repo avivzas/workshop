@@ -50,7 +50,6 @@ if (isset($_POST['submit'])) {
     $city = $_POST['city'];
     $address = $_POST['address'];
     $placeType = $_POST['placeType'];
-    $rentalPeriod = $_POST['rentalPeriod'];
     $dailyPrice = $_POST['dailyPrice'];
     $ownerName = $_POST['ownerName'];
     $email = $_POST['email'];
@@ -66,8 +65,7 @@ if (isset($_POST['submit'])) {
         region = '$region',
         city='$city', 
         address='$address', 
-        placeType='$placeType', 
-        rentalPeriod='$rentalPeriod', 
+        placeType='$placeType',  
         dailyPrice=$dailyPrice, 
         ownerName='$ownerName',
          email='$email',
@@ -80,8 +78,7 @@ if (isset($_POST['submit'])) {
           region = '$region',
           city='$city', 
           address='$address', 
-          placeType='$placeType', 
-          rentalPeriod='$rentalPeriod', 
+          placeType='$placeType',  
           dailyPrice=$dailyPrice, 
           ownerName='$ownerName',
            email='$email',

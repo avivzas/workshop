@@ -136,7 +136,7 @@
     </div>
     <div><h1 class="greeting m-0 " id="greeting" ></h1></div>
     <div class="d-flex justify-content-center align-items-center m-0 p-2">
-    <div id="carouselExample" class="carousel slide" style="max-width: 600px;">
+    <div id="carouselExample" class="carousel slide" style="max-width: 600px;" data-bs-ride="carousel">
   <div class="carousel-inner  " >
     <div class="carousel-item active" >
       <img src="/workshop/pics/space1.jpg" class="d-block w-100" alt="space 1" >
