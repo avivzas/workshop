@@ -216,8 +216,8 @@ WHERE
                   $imageData = base64_decode($row['pictures']);
                   $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
                   $aboutWorkspace=$row['aboutWorkspace'];
-                  $startDate = $row['startDate'];
-                  $endDate = $row['endDate'];
+                  $startDate = date('d-m-Y', strtotime($row['startDate']));
+                  $endDate = date('d-m-Y', strtotime($row['endDate']));
       
                   echo "<tr>
                   <th scope='row'> $region </th>
@@ -276,8 +276,8 @@ WHERE
                   $imageData = base64_decode($row['pictures']);
                   $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
                   $aboutWorkspace=$row['aboutWorkspace'];
-                  $startDate = $row['startDate'];
-                  $endDate = $row['endDate'];
+                  $startDate = date('d-m-Y', strtotime($row['startDate']));
+                  $endDate = date('d-m-Y', strtotime($row['endDate']));
       
                   echo "<tr>
                   <th scope='row'> $region </th>

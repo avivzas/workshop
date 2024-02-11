@@ -167,8 +167,8 @@ $id = $_GET['id'];
                     while ($row = $resultFuture->fetch_assoc()) {
                         echo "<tr>
                             <th scope='row'>" . htmlspecialchars($row['fullName']) . "</th>
-                            <td>" . htmlspecialchars($row['startDate']) . "</td>
-                            <td>" . htmlspecialchars($row['endDate']) . "</td>
+                            <td>" . htmlspecialchars(date('d-m-Y', strtotime($row['startDate']))) . "</td>
+                            <td>" . htmlspecialchars(date('d-m-Y', strtotime($row['endDate']))) . "</td>
                             <td>
                                 <button class='btn btn-primary'><a href='mailto:" . htmlspecialchars($row['email']) . "' class='text-light'>Contact</a></button>
                             </td>
@@ -200,8 +200,8 @@ $id = $_GET['id'];
                     while ($row = $resultPast->fetch_assoc()) {
                         echo "<tr>
                             <th scope='row'>" . htmlspecialchars($row['fullName']) . "</th>
-                            <td>" . htmlspecialchars($row['startDate']) . "</td>
-                            <td>" . htmlspecialchars($row['endDate']) . "</td>
+                            <td>" . htmlspecialchars(date('d-m-Y', strtotime($row['startDate']))) . "</td>
+                            <td>" . htmlspecialchars(date('d-m-Y', strtotime($row['endDate']))) . "</td>
                             <td>
                                 <button class='btn btn-primary'><a href='mailto:" . htmlspecialchars($row['email']) . "' class='text-light'>Contact</a></button>
                             </td>
