@@ -14,6 +14,49 @@ $conn = new mysqli($host, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+// Current date for comparison
+$today = date('Y-m-d');
+$user = $_SESSION['userName'];
+
+// Query for current and future reservations
+$sqlCurrentAndFuture = "SELECT 
+    workspaces.region,
+    workspaces.city,
+    workspaces.address,
+    workspaces.placeType,
+    workspaces.dailyPrice,
+    workspaces.ownerName,
+    workspaces.email,
+    workspaces.pictures,
+    workspaces.aboutWorkspace,
+    reservations.startDate,
+    reservations.endDate
+FROM 
+    workspaces
+JOIN 
+    reservations ON workspaces.id = reservations.spaceID
+WHERE 
+    reservations.userName = '$user' AND reservations.endDate >= '$today'";
+
+// Query for past reservations
+$sqlPast = "SELECT 
+    workspaces.region,
+    workspaces.city,
+    workspaces.address,
+    workspaces.placeType,
+    workspaces.dailyPrice,
+    workspaces.ownerName,
+    workspaces.email,
+    workspaces.pictures,
+    workspaces.aboutWorkspace,
+    reservations.startDate,
+    reservations.endDate
+FROM 
+    workspaces
+JOIN 
+    reservations ON workspaces.id = reservations.spaceID
+WHERE 
+    reservations.userName = '$user' AND reservations.endDate < '$today'";
 ?>
 
 <!DOCTYPE html>
@@ -139,11 +182,12 @@ if ($conn->connect_error) {
     <h1 class="greeting">My Reservations</h1></div>
 
 <button class="btn btn-primary my-5 mx-5 px-5 py-2 "> <a href="#" class="text-light"> New Reservation </a></button> 
-
-
-<table class="table m-0 p-0">
-  <thead>
-    <tr>
+<!-- Current and Future Reservations -->
+<div class="container-fluid">
+    <h2>Current and Future Reservations</h2>
+    <table class="table">
+        <thead>
+        <tr>
     <th scope="col">Region</th>
       <th scope="col">City</th>
       <th scope="col">Address</th>
@@ -156,73 +200,112 @@ if ($conn->connect_error) {
       <th scope="col">End Date</th>
       <th scope="col">Options</th>
     </tr>
+        </thead>
+        <tbody>
+            <?php
+            $resultCurrentAndFuture = $conn->query($sqlCurrentAndFuture);
+            if ($resultCurrentAndFuture->num_rows > 0) {
+                while ($row = $resultCurrentAndFuture->fetch_assoc()) {
+                  $region = $row['region'];
+                  $city=$row['city'];
+                  $address=$row['address'];
+                  $placeType=$row['placeType'];
+                  $dailyPrice=$row['dailyPrice'];
+                  $ownerName=$row['ownerName'];
+                  $email=$row['email'];
+                  $imageData = base64_decode($row['pictures']);
+                  $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
+                  $aboutWorkspace=$row['aboutWorkspace'];
+                  $startDate = $row['startDate'];
+                  $endDate = $row['endDate'];
+      
+                  echo "<tr>
+                  <th scope='row'> $region </th>
+                  <td>$city</td>
+                  <td>$address</td>
+                  <td>$placeType</td>
+                  <td>$dailyPrice</td>
+                  <td>$ownerName</td>
+                  <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
+                  <td>$aboutWorkspace</td>
+                  <td>$startDate</td>
+                  <td>$endDate</td>
+      
+                  <td>
+                    <button class='btn btn-primary'><a href='mailto:$email' class='text-light'>Contact</a></button>
+                  </td>
+      
+                </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='11'>No current or future reservations found.</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+    <div class="container-fluid">
+    <h2>Past Reservations</h2>
+    <table class="table">
+        <thead>
+        <tr>
+    <th scope="col">Region</th>
+      <th scope="col">City</th>
+      <th scope="col">Address</th>
+      <th scope="col">Place Type</th>
+      <th scope="col">Daily price</th>
+      <th scope="col">Owner name</th>
+      <th scope="col">Picture</th>
+      <th scope="col">About</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Options</th>
+    </tr>
+        </thead>
+        <tbody>
+            <?php
+            $resultPast = $conn->query($sqlPast);
+            if ($resultPast->num_rows > 0) {
+                while ($row = $resultPast->fetch_assoc()) {
+                  $region = $row['region'];
+                  $city=$row['city'];
+                  $address=$row['address'];
+                  $placeType=$row['placeType'];
+                  $dailyPrice=$row['dailyPrice'];
+                  $ownerName=$row['ownerName'];
+                  $email=$row['email'];
+                  $imageData = base64_decode($row['pictures']);
+                  $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
+                  $aboutWorkspace=$row['aboutWorkspace'];
+                  $startDate = $row['startDate'];
+                  $endDate = $row['endDate'];
+      
+                  echo "<tr>
+                  <th scope='row'> $region </th>
+                  <td>$city</td>
+                  <td>$address</td>
+                  <td>$placeType</td>
+                  <td>$dailyPrice</td>
+                  <td>$ownerName</td>
+                  <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
+                  <td>$aboutWorkspace</td>
+                  <td>$startDate</td>
+                  <td>$endDate</td>
+      
+                  <td>
+                    <button class='btn btn-primary'><a href='mailto:$email' class='text-light'>Contact</a></button>
+                  </td>
+      
+                </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='11'>No current or future reservations found.</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>  
 
 
-  </thead> 
 
-  <tbody>
-    
-
-  <?php
-    $user = $_SESSION['userName'];
-    $sql = "SELECT 
-    workspaces.region,
-    workspaces.city,
-    workspaces.address,
-    workspaces.placeType,
-    workspaces.dailyPrice,
-    workspaces.ownerName,
-    workspaces.email,
-    workspaces.pictures,
-    workspaces.aboutWorkspace,
-    reservations.startDate,
-    reservations.endDate
-FROM 
-    workspaces
-JOIN 
-    reservations ON workspaces.id = reservations.spaceID
-WHERE 
-    reservations.userName = '" . $user . "';
-";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        // Output data from each row
-        while ($row = $result->fetch_assoc()) {
-            $region = $row['region'];
-            $city=$row['city'];
-            $address=$row['address'];
-            $placeType=$row['placeType'];
-            $dailyPrice=$row['dailyPrice'];
-            $ownerName=$row['ownerName'];
-            $email=$row['email'];
-            $imageData = base64_decode($row['pictures']);
-            $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
-            $aboutWorkspace=$row['aboutWorkspace'];
-            $startDate = $row['startDate'];
-            $endDate = $row['endDate'];
-
-            echo "<tr>
-            <th scope='row'> $region </th>
-            <td>$city</td>
-            <td>$address</td>
-            <td>$placeType</td>
-            <td>$dailyPrice</td>
-            <td>$ownerName</td>
-            <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
-            <td>$aboutWorkspace</td>
-            <td>$startDate</td>
-            <td>$endDate</td>
-
-            <td>
-              <button class='btn btn-primary'><a href='mailto:$email' class='text-light'>Contact</a></button>
-            </td>
-
-          </tr>";
-          
-    }}
-    ?>
-  </tbody>
-</table>
 
 </div>
 

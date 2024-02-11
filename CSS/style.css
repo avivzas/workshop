@@ -347,3 +347,15 @@ footer {
   color: rgb(63, 86, 155);
 }
 /*----------------*/
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+}
+.table th,
+.table tr,
+.table td {
+  border: 2px solid #010229;
+  padding: 8px;
+  text-align: center;
+}

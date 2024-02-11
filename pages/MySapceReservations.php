@@ -161,7 +161,7 @@ $id = $_GET['id'];
             <tbody>
                 <?php
                 $today = date('Y-m-d');
-                $sqlFuture = "SELECT * FROM `reservations` WHERE spaceID=$id AND endDate <= '$today'";
+                $sqlFuture = "SELECT * FROM `reservations` WHERE spaceID=$id AND endDate >= '$today'";
                 $resultFuture = $conn->query($sqlFuture);
                 if ($resultFuture->num_rows > 0) {
                     while ($row = $resultFuture->fetch_assoc()) {
