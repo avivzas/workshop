@@ -130,7 +130,7 @@ updateWorkspaceReservationStatus($conn);
                   <a class="dropdown-item" href="Addworkspace.php">Create new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists workspaces</a>
+                  <a class="dropdown-item" href="Existworkspace.php">Exists workspaces</a>
                 </li>
               </ul>
             </li>
@@ -147,7 +147,7 @@ updateWorkspaceReservationStatus($conn);
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a class="dropdown-item" href="#">Search new workspace</a>
+                  <a class="dropdown-item" href="SearchWorkspace.php">Search new workspace</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="ExistReservations.php">Exists Reservations</a>

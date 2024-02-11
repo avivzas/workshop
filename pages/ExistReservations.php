@@ -140,10 +140,10 @@ WHERE
               </a>
               <ul class="dropdown-menu dropdown-menu-dark">
                 <li>
-                  <a class="dropdown-item" href="#">Search new workspace</a>
+                  <a class="dropdown-item" href="SearchWorkspace.php">Search new workspace</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">Exists Reservations</a>
+                  <a class="dropdown-item" href="ExistReservations.php">Exists Reservations</a>
                 </li>
               </ul>
             </li>
