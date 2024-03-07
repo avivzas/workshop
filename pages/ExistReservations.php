@@ -181,7 +181,7 @@ WHERE
 <div class="d-flex justify-content-center align-items-center m-0  pt-5 pb-0 ">
     <h1 class="greeting">My Reservations</h1></div>
 
-<button class="btn btn-primary my-5 mx-5 px-5 py-2 "> <a href="#" class="text-light"> New Reservation </a></button> 
+<button class="btn btn-primary my-5 mx-5 px-5 py-2 "> <a href="SearchWorkspace.php" class="text-light"> New Reservation </a></button> 
 <!-- Current and Future Reservations -->
 <div class="container-fluid">
     <h2>Current and Future Reservations</h2>
