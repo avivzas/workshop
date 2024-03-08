@@ -86,7 +86,7 @@ updateWorkspaceReservationStatus($conn);
       crossorigin="anonymous"
     ></script>
     
-
+    <script src="https://www.paypal.com/sdk/js?client-id=AYfx2ygnKxYNcFXhf8ScEFk899qs9GAlHajx28L98g62sok1GvI716Qb9sNvKummn8MlTJ3ZS_hnl3be&currency=ILS"></script>
 
     
     <link rel="icon" href="/workshop/pics/Logo.png" />
@@ -178,13 +178,12 @@ updateWorkspaceReservationStatus($conn);
         </div>
       </div>
     </nav>
-
-<div class="container-fluid p-0 m-0 ">
+    <div class="container-fluid p-0 m-0 ">
 
 
 <div class="d-flex justify-content-center align-items-center m-0  pt-5 pb-0 ">
-    <h1 class="greeting">Available Workspaces</h1></div>
-    <button class="btn btn-primary my-5 mx-5 px-5 py-2 "> <a href="SearchWorkspace.php" class="text-light"> New Search </a></button>
+    <h1 class="greeting">Check Out</h1></div>
+    <button class="btn btn-danger my-5 mx-5 px-5 py-2 "> <a href="SearchWorkspace.php" class="text-light"> Cancel </a></button>
 <table class="table m-0 p-0">
   <thead>
     <tr>
@@ -204,107 +203,119 @@ updateWorkspaceReservationStatus($conn);
   </thead> 
 
   <tbody>
-  
-  <?php
-    $user = $_SESSION['userName'];
-    if (isset($_POST['submit'])) {
- 
-  
-  $user = $_SESSION['userName'];
-  $region = $_POST['region'];
-  $startDate = $_POST['startDate'];
-  $endDate = $_POST['endDate'];
-  $fullName = $_POST['FullName'];
-  $userEmail = $_POST['email'];
-  $sql = "SELECT DISTINCT w.*, reg.*
-        FROM workspaces w 
-        LEFT JOIN registrations reg ON (w.userName = reg.userName)
-        WHERE w.region = ? AND NOT EXISTS (
-            SELECT 1 FROM reservations r
-            WHERE w.id = r.spaceId
-            AND r.endDate >= ?
-            AND r.startDate <= ?
-        )AND w.userName != ?";}
+<?php
+$ini = parse_ini_file('../config.ini');
 
-// Prepare the statement
-$stmt = $conn->prepare($sql);
+$host = $ini['db_host']; // database host
+$username = $ini['db_user']; // database username
+$password = $ini['db_password']; // database password
+$dbname = $ini['db_name']; // database name
 
-// Bind parameters. Assuming $region, $startDate, and $endDate are already sanitized and validated
-$stmt->bind_param("ssss", $region, $startDate, $endDate, $user);
+// Create connection
+$conn = new mysqli($host, $username, $password, $dbname);
 
-// Execute the statement
-$stmt->execute();
-
-// Fetch the results
-$result = $stmt->get_result();
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-      $workspaceID = $row['id'];
-      $region=$row['region'];
-      $city=$row['city'];
-      $address=$row['address'];
-      $placeType=$row['placeType'];
-      $dailyPrice=$row['dailyPrice'];
-      $ownerName=$row['ownerName'];
-      $email=$row['email'];
-      $imageData = base64_decode($row['pictures']);
-      $imageSrc = "data:image/jpeg;base64," . base64_encode($imageData);
-      $aboutWorkspace=$row['aboutWorkspace'];
-      // Convert start and end dates to DateTime objects
-      $startDateObj = new DateTime($startDate);
-      $endDateObj = new DateTime($endDate);
-
-      // Calculate the difference between the dates
-      $interval = $startDateObj->diff($endDateObj);
-
-      // Convert date interval to total days
-      $days = (int)$interval->format('%a');
-      $total = $dailyPrice * ($days);
-
-      echo "<tr>
-      <th scope='row'> $region </th>
-      <td>$city</td>
-      <td>$address</td>
-      <td>$placeType</td>
-      <td>$dailyPrice</td>
-      <td>$ownerName</td>
-      <td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
-      <td>$aboutWorkspace</td>
-      <td>$total</td>
-
-      <td>
-      <button class='btn btn-primary m-2 px-5  '><a href='mailto:$email' class='text-light'>Connect</a></button>
-      <form action='Cart.php' method='post'>
-      <input type='hidden' name='region' value='$region'>
-      <input type='hidden' name='city' value='$city'>
-      <input type='hidden' name='ownerName' value='$ownerName'>
-      <input type='hidden' name='address' value='$address'>
-      <input type='hidden' name='placeType' value='$placeType'>
-      <input type='hidden' name='dailyPrice' value='$dailyPrice'>
-      <input type='hidden' name='imageSrc' value='$imageSrc'>
-      <input type='hidden' name='aboutWorkspace' value='$aboutWorkspace'>
-      <input type='hidden' name='total' value='$total'>
-      <input type='hidden' name='workspaceID' value='$workspaceID'>
-      <input type='hidden' name='startDate' value='$startDate'>
-      <input type='hidden' name='endDate' value='$endDate'>
-      <input type='hidden' name='email' value='$userEmail'>
-      <input type='hidden' name='fullName' value='$fullName'>
-      <button class='btn btn-success submit px-5 ' type='submit' name='submit'>Reserve</button>
-  </form>
-      </td>
-
-    </tr>";
- 
-    }
-} else {
-  echo "<tr><td colspan='11'>No available workspaces found.</td></tr>";
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+$user = $_SESSION['userName'];
+if (isset($_POST['submit'])) {
+    $workspaceID = $_POST['workspaceID'];
+    $startDate = $_POST['startDate'];
+    $endDate = $_POST['endDate'];
+    $region = $_POST['region'];
+    $city = $_POST['city'];
+    $ownerName = $_POST['ownerName'];
+    $address = $_POST['address'];
+    $placeType = $_POST['placeType'];
+    $dailyPrice = $_POST['dailyPrice'];
+    $imageSrc = $_POST['imageSrc'];
+    $total = $_POST['total'];
+    $aboutWorkspace = $_POST['aboutWorkspace'];
+    $email = $_POST['email'];
+    $fullName = $_POST['fullName'];
+}
+// Convert start and end dates to DateTime objects
+$startDateObj = new DateTime($startDate);
+$endDateObj = new DateTime($endDate);
 
-$stmt->close();
-    ?>
+// Calculate the difference between the dates
+$interval = $startDateObj->diff($endDateObj);
+
+// Convert date interval to total days
+$days = (int)$interval->format('%a');
+$total = $dailyPrice * ($days);
+
+echo "<tr>
+<th scope='row'> $region </th>
+<td>$city</td>
+<td>$address</td>
+<td>$placeType</td>
+<td>$dailyPrice</td>
+<td>$ownerName</td>
+<td><img src='$imageSrc' alt='Workspace Image' width='200' height='200'></td>
+<td>$aboutWorkspace</td>
+<td>$total</td>
+<td>
+<div id='paypal-button-container'></div>
+</td>
+</tr>";
+ ?>
   </tbody>
 </table>
 
 </div>
 
 <footer><p>©20241W74</p></footer>
+
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) { 
+      // Set up the transaction
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            currency_code: "ILS",
+            value: '<?php echo $total; ?>' 
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Capture the funds from the transaction
+      return actions.order.capture().then(function(details) {
+        // Show a success message to your buyer
+        alert('Transaction completed by ' + details.payer.name.given_name);
+        
+        $.ajax({
+          url: 'http://localhost/workshop/pages/helpers/ReserveHelper.php',
+          method: 'POST',
+          data: {
+            workspaceID: '<?php echo $workspaceID; ?>', 
+            startDate: '<?php echo $startDate; ?>',
+            endDate: '<?php echo $endDate; ?>',
+            email: '<?php echo $email; ?>',
+            userName: '<?php echo $_SESSION['userName']; ?>',
+            fullName: '<?php echo $fullName; ?>' 
+          },
+          success: function(response) {
+            window.location.href = 'ExistReservations.php';
+          },
+          error: function(xhr, status, error) {
+            // Enhanced error logging
+            console.error("AJAX Error:", status, error, xhr.responseText);
+          }
+        });
+      });
+    },
+    onError: function (err) {
+      // Debug: Log any errors encountered during the transaction
+      console.error("PayPal Button Error:", err);
+    }
+  }).render('#paypal-button-container');
+
+</script>
+
+</body>
+
+</html>
