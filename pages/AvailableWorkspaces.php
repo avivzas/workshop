@@ -273,7 +273,7 @@ if ($result->num_rows > 0) {
       <td>$total</td>
 
       <td>
-      <button class='btn btn-primary m-2 px-5  '><a href='mailto:$email' class='text-light'>Connect</a></button>
+      <button class='btn btn-primary m-2 px-5  '><a href='mailto:$email' class='text-light'>Contact</a></button>
       <form action='Cart.php' method='post'>
       <input type='hidden' name='region' value='$region'>
       <input type='hidden' name='city' value='$city'>
