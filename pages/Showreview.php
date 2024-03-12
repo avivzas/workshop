@@ -145,6 +145,7 @@ if (!isset($_GET['id'])) {
             <thead>
                 <tr>
                     <th scope="col">Full name</th>
+                    <th scope="col">Rate</th>
                     <th scope="col">Review</th>
 
                 </tr>
@@ -157,16 +158,24 @@ $result = $conn->query($sql);
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>
                             <th scope='row'>" . htmlspecialchars($row['fullName']) . "</th>
+                            <td>" . htmlspecialchars($row['rate']) . "</td>
                             <td>" . htmlspecialchars($row['review']) . "</td>
                         </tr>";
+                        $total = $total+$row['rate'];
                     }
+                    $score = $total/($result->num_rows);
                 } else {
-                    echo "<tr><td colspan='2'>No reviews found.</td></tr>";
+                    echo "<tr><td colspan='3'>No reviews found.</td></tr>";
                 }
                 
 ?>
             </tbody>
         </table>
+        <?php
+        if ($result->num_rows > 0) {
+          echo" <div class='d-flex justify-content-center align-items-center m-0 pt-5 pb-0'>
+             <h1 class='greeting'>Total Rate: $score </h1>
+        </div>";}?>
         </div>
 
 <footer><p>©20241W74</p></footer>

@@ -44,12 +44,13 @@ session_start();
 if (isset($_POST['submit'])) {
     $spaceID = $_POST['spaceID'];
     $fullName = $_POST['fullName'];
+    $rate = $_POST['rate'];
     $review = $_POST['review'];
    
 
         // Insert form data into the database
-        $sql = "INSERT INTO reviews (fullName, review,spaceID, userName) 
-                VALUES ('$fullName','$review','$spaceID', '" . $_SESSION['userName'] . "')";
+        $sql = "INSERT INTO reviews (fullName, review,rate,spaceID, userName) 
+                VALUES ('$fullName','$review','$rate','$spaceID', '" . $_SESSION['userName'] . "')";
 
         if ($conn->query($sql) === TRUE) {
             echo '<div class="container-fluid h-100 d-flex justify-content-center align-items-center fs-5" >';

@@ -156,6 +156,10 @@ $spaceID = $_GET['id'];
                 <input class="input" type="text" id="fullName" name="fullName" oninput="validateFullName(this) " required>
                 <span>Full name</span>
                 </label>
+                <label> 
+                <input class="input" type="number" id="rate" name="rate" max ="5" min="1" required>
+                <span>Rate</span>
+                </label>
 
                 <label> 
                 <textarea class="input" id="review" name="review" rows="4" required></textarea>
