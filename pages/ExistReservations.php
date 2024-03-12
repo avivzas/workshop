@@ -20,6 +20,7 @@ $user = $_SESSION['userName'];
 
 // Query for current and future reservations
 $sqlCurrentAndFuture = "SELECT 
+    workspaces.id,
     workspaces.region,
     workspaces.city,
     workspaces.address,
@@ -40,6 +41,7 @@ WHERE
 
 // Query for past reservations
 $sqlPast = "SELECT 
+    workspaces.id,
     workspaces.region,
     workspaces.city,
     workspaces.address,
@@ -206,6 +208,7 @@ WHERE
             $resultCurrentAndFuture = $conn->query($sqlCurrentAndFuture);
             if ($resultCurrentAndFuture->num_rows > 0) {
                 while ($row = $resultCurrentAndFuture->fetch_assoc()) {
+                  $spaceID = $row['id'];
                   $region = $row['region'];
                   $city=$row['city'];
                   $address=$row['address'];
@@ -233,6 +236,7 @@ WHERE
       
                   <td>
                     <button class='btn btn-primary'><a href='mailto:$email' class='text-light'>Contact</a></button>
+                    <button class='btn btn-primary'><a href='Addreview.php?id=$spaceID' class='text-light'>Add review</a></button>
                   </td>
       
                 </tr>";
@@ -266,6 +270,7 @@ WHERE
             $resultPast = $conn->query($sqlPast);
             if ($resultPast->num_rows > 0) {
                 while ($row = $resultPast->fetch_assoc()) {
+                  $spaceID = $row['id'];
                   $region = $row['region'];
                   $city=$row['city'];
                   $address=$row['address'];
@@ -293,6 +298,7 @@ WHERE
       
                   <td>
                     <button class='btn btn-primary'><a href='mailto:$email' class='text-light'>Contact</a></button>
+                    <button class='btn btn-primary'><a href='Addreview.php?id=$spaceID' class='text-light'>Add review</a></button>
                   </td>
       
                 </tr>";

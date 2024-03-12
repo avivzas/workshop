@@ -247,11 +247,13 @@ updateWorkspaceReservationStatus($conn);
         echo "<td>
 
                   <button class='btn btn-primary'><a href='MySapceReservations.php?id=$rowId' class='text-light'>Reservations</a></button>
+                  <button class='btn btn-primary'><a href='Showreview.php?id=$rowId' class='text-light'>Reviews</a></button>
 
               </td>";
     } else {
         echo "<td>
                 <button class='btn btn-primary'><a href='MySapceReservations.php?id=$rowId' class='text-light'>Reservations</a></button>
+                <button class='btn btn-primary'><a href='Showreview.php?id=$rowId' class='text-light'>Reviews</a></button>
                   <button class='btn btn-primary'><a href='Updateworkspace.php?id=$rowId' class='text-light'>Update</a></button>
                   <button class='btn btn-danger'><a href='Delete.php?delete=$rowId' class='text-light'>Delete</a></button>
               </td>";
