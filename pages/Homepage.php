@@ -225,7 +225,7 @@ updateWorkspaceReservationStatus($conn);
     </div>
     <div class="d-flex justify-content-center align-items-center m-0  p-0">
     <h1 class="greeting">Meet our developers</h1></div>
-    <div class="d-flex justify-content-center  m-0  p-0">
+    <div class="d-flex flex-wrap justify-content-center m-0  p-0">
       <div class="card m-3 border-black border-2 rounded-2 " style="width: 18rem;">
         <img src="/workshop/pics/aviv.jpg" class="card-img-top" alt="aviv">
         <div class="card-body">
