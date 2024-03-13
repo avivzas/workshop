@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: מרץ 09, 2024 בזמן 10:49 PM
--- גרסת שרת: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: מרץ 13, 2024 בזמן 11:12 AM
+-- גרסת שרת: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,6 +39,8 @@ CREATE TABLE `registrations` (
 -- הוצאת מידע עבור טבלה `registrations`
 --
 
+
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +60,28 @@ CREATE TABLE `reservations` (
 --
 -- הוצאת מידע עבור טבלה `reservations`
 --
+
+
+-- --------------------------------------------------------
+
+--
+-- מבנה טבלה עבור טבלה `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `spaceID` int(11) NOT NULL,
+  `userName` varchar(255) NOT NULL,
+  `fullName` varchar(255) NOT NULL,
+  `review` text NOT NULL,
+  `rate` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- הוצאת מידע עבור טבלה `reviews`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -83,6 +107,8 @@ CREATE TABLE `workspaces` (
 --
 -- הוצאת מידע עבור טבלה `workspaces`
 --
+
+
 --
 -- Indexes for dumped tables
 --
@@ -102,6 +128,14 @@ ALTER TABLE `reservations`
   ADD KEY `userName` (`userName`);
 
 --
+-- אינדקסים לטבלה `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `spaceID` (`spaceID`),
+  ADD KEY `userName` (`userName`);
+
+--
 -- אינדקסים לטבלה `workspaces`
 --
 ALTER TABLE `workspaces`
@@ -116,7 +150,13 @@ ALTER TABLE `workspaces`
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `workspaces`
@@ -134,6 +174,13 @@ ALTER TABLE `workspaces`
 ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`spaceID`) REFERENCES `workspaces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`userName`) REFERENCES `registrations` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- הגבלות לטבלה `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`spaceID`) REFERENCES `workspaces` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`userName`) REFERENCES `registrations` (`userName`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- הגבלות לטבלה `workspaces`
